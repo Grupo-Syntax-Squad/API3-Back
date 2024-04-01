@@ -32,4 +32,70 @@ public class Manutencao {
 	
 	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	private Long man_endereco_id;
+
+	public Long getMan_id() {
+		return man_id;
+	}
+
+	public void setMan_id(Long man_id) {
+		this.man_id = man_id;
+	}
+
+	public String getMan_descricao() {
+		return man_descricao;
+	}
+
+	public void setMan_descricao(String man_descricao) {
+		this.man_descricao = man_descricao;
+	}
+
+	public String getMan_data() {
+		return man_data;
+	}
+
+	public void setMan_data(String man_data) {
+		this.man_data = man_data;
+	}
+
+	public String getMan_hora() {
+		return man_hora;
+	}
+
+	public void setMan_hora(String man_hora) {
+		this.man_hora = man_hora;
+	}
+
+	public Long getMan_administrador_id() {
+		return man_administrador_id;
+	}
+
+	public void setMan_administrador_id(Long man_administrador_id) {
+		this.man_administrador_id = man_administrador_id;
+	}
+
+	public Long getMan_ativo_id() {
+		return man_ativo_id;
+	}
+
+	public void setMan_ativo_id(Long man_ativo_id) {
+		this.man_ativo_id = man_ativo_id;
+	}
+
+	public String getMan_localizacao() {
+		return man_localizacao;
+	}
+
+	public void setMan_localizacao(String man_localizacao) {
+		this.man_localizacao = man_localizacao;
+	}
+
+	public Long getMan_endereco_id() {
+		return man_endereco_id;
+	}
+
+	public void setMan_endereco_id(Long man_endereco_id) {
+		this.man_endereco_id = man_endereco_id;
+	}
+	
+	
 }

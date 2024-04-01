@@ -19,4 +19,30 @@ public class Empresa {
 	
 	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	private Long emp_endereco_id;
+
+	public Long getEmp_id() {
+		return emp_id;
+	}
+
+	public void setEmp_id(Long emp_id) {
+		this.emp_id = emp_id;
+	}
+
+	public String getEmp_nome() {
+		return emp_nome;
+	}
+
+	public void setEmp_nome(String emp_nome) {
+		this.emp_nome = emp_nome;
+	}
+
+	public Long getEmp_endereco_id() {
+		return emp_endereco_id;
+	}
+
+	public void setEmp_endereco_id(Long emp_endereco_id) {
+		this.emp_endereco_id = emp_endereco_id;
+	}
+	
+	
 }
