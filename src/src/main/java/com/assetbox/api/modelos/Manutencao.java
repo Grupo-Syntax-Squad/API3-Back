@@ -2,33 +2,34 @@ package com.assetbox.api.modelos;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
 
-@Entity
-public class Destinatario {
+public class Manutencao {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long des_id;
+	private Long man_id;
 	
 	@Column
-	private String des_nome;
+	private String man_descricao;
 	
 	@Column
-	private String des_email;
+	private String man_data;
 	
 	@Column
-	private String des_senha;
-	
-	@Column
-	private String des_telefone;
-	
-	@Column
-	private Long des_empresa;
+	private String man_hora;
 	
 	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-	private Long des_endereco_id;
+	private Long man_administrador_id;
+	
+	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+	private Long man_ativo_id;
+	
+	@Column
+	private String man_localizacao;
+	
+	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+	private Long man_endereco_id;
 }

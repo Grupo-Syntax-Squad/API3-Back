@@ -1,10 +1,12 @@
 package com.assetbox.api.modelos;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class Empresa {
@@ -15,6 +17,6 @@ public class Empresa {
 	@Column
 	private String emp_nome;
 	
-	@Column
+	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	private Long emp_endereco_id;
 }
