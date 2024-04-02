@@ -30,7 +30,7 @@ public class Destinatario {
 	private Long des_empresa;
 	
 	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-	private Long des_endereco_id;
+	private Endereco des_endereco_id;
 
 	public Long getDes_id() {
 		return des_id;
@@ -80,11 +80,11 @@ public class Destinatario {
 		this.des_empresa = des_empresa;
 	}
 
-	public Long getDes_endereco_id() {
+	public Endereco getDes_endereco_id() {
 		return des_endereco_id;
 	}
 
-	public void setDes_endereco_id(Long des_endereco_id) {
+	public void setDes_endereco_id(Endereco des_endereco_id) {
 		this.des_endereco_id = des_endereco_id;
 	}
 	

@@ -9,6 +9,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 
+import com.assetbox.api.modelos.Administrador;
+import com.assetbox.api.modelos.Destinatario;
+
 @Entity
 public class Ativo {
 	@Id
@@ -30,8 +33,8 @@ public class Ativo {
 	@Column
 	private String ati_complemento;
 	
-	@OneToMany
-	private String ati_destinatario_id;
+	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+	private Destinatario ati_destinatario_id;
 	
 	@Column
 	private String ati_marca;
@@ -58,7 +61,7 @@ public class Ativo {
 	private double ati_preco_aquisicao;
 	
 	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-	private String ati_administrador_id;
+	private Administrador ati_administrador_id;
 	
 	@Column 
 	private String ati_chave_nf_e;
@@ -138,11 +141,11 @@ public class Ativo {
 		this.ati_complemento = ati_complemento;
 	}
 
-	public String getAti_destinatario_id() {
+	public Destinatario getAti_destinatario_id() {
 		return ati_destinatario_id;
 	}
 
-	public void setAti_destinatario_id(String ati_destinatario_id) {
+	public void setAti_destinatario_id(Destinatario ati_destinatario_id) {
 		this.ati_destinatario_id = ati_destinatario_id;
 	}
 
@@ -210,11 +213,11 @@ public class Ativo {
 		this.ati_preco_aquisicao = ati_preco_aquisicao;
 	}
 
-	public String getAti_administrador_id() {
+	public Administrador getAti_administrador_id() {
 		return ati_administrador_id;
 	}
 
-	public void setAti_administrador_id(String ati_administrador_id) {
+	public void setAti_administrador_id(Administrador ati_administrador_id) {
 		this.ati_administrador_id = ati_administrador_id;
 	}
 

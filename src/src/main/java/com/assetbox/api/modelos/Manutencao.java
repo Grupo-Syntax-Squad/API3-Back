@@ -2,11 +2,13 @@ package com.assetbox.api.modelos;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
 
+@Entity
 public class Manutencao {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,16 +24,16 @@ public class Manutencao {
 	private String man_hora;
 	
 	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-	private Long man_administrador_id;
+	private Administrador man_administrador_id;
 	
 	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-	private Long man_ativo_id;
+	private Ativo man_ativo_id;
 	
 	@Column
 	private String man_localizacao;
 	
 	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-	private Long man_endereco_id;
+	private Endereco man_endereco_id;
 
 	public Long getMan_id() {
 		return man_id;
@@ -65,19 +67,19 @@ public class Manutencao {
 		this.man_hora = man_hora;
 	}
 
-	public Long getMan_administrador_id() {
+	public Administrador getMan_administrador_id() {
 		return man_administrador_id;
 	}
 
-	public void setMan_administrador_id(Long man_administrador_id) {
+	public void setMan_administrador_id(Administrador man_administrador_id) {
 		this.man_administrador_id = man_administrador_id;
 	}
 
-	public Long getMan_ativo_id() {
+	public Ativo getMan_ativo_id() {
 		return man_ativo_id;
 	}
 
-	public void setMan_ativo_id(Long man_ativo_id) {
+	public void setMan_ativo_id(Ativo man_ativo_id) {
 		this.man_ativo_id = man_ativo_id;
 	}
 
@@ -89,11 +91,11 @@ public class Manutencao {
 		this.man_localizacao = man_localizacao;
 	}
 
-	public Long getMan_endereco_id() {
+	public Endereco getMan_endereco_id() {
 		return man_endereco_id;
 	}
 
-	public void setMan_endereco_id(Long man_endereco_id) {
+	public void setMan_endereco_id(Endereco man_endereco_id) {
 		this.man_endereco_id = man_endereco_id;
 	}
 	
