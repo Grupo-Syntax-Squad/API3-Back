@@ -19,7 +19,7 @@ public class ControleAtivo {
 	@Autowired
 	private RepositorioAtivo ativo;
 	
-	@GetMapping("/ativo")
+	@GetMapping("/ativos")
 	public List<Ativo> obterAtivo(){
 		return ativo.findAll();
 	}
