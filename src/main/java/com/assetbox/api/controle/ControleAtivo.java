@@ -7,25 +7,35 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.assetbox.api.modelos.Anexo;
 import com.assetbox.api.modelos.Ativo;
+import com.assetbox.api.repositorio.RepositorioAnexo;
 import com.assetbox.api.repositorio.RepositorioAtivo;
+import com.assetbox.api.repositorio.RepositorioDestinatario;
+import com.assetbox.api.repositorio.RepositorioImagem;
+
 import org.springframework.web.bind.annotation.PostMapping;
-
-
 
 @RestController
 public class ControleAtivo {
-	
 	@Autowired
-	private RepositorioAtivo ativo;
-	
+	private RepositorioAnexo anexoRepositorio;
+
+	@Autowired
+	private RepositorioAtivo ativoRepositorio;
+
+	@Autowired
+	private RepositorioDestinatario destinatarioRepositorio;
+
+	@Autowired
+	private RepositorioImagem imagemRepositorio;
+
 	@GetMapping("/ativos")
-	public List<Ativo> obterAtivo(){
-		return ativo.findAll();
+	public List<Ativo> obterAtivo() {
+		return ativoRepositorio.findAll();
 	}
 
 	@PostMapping("/cadastrar/ativo")
-	public Ativo cadastrarAtivo(@RequestBody Ativo ativo) {
-		return this.ativo.save(ativo);
+	public void cadastrarAtivo(@RequestBody Ativo ativo) {
 	}
 }
