@@ -1,5 +1,7 @@
 package com.assetbox.api.modelos;
 
+import com.assetbox.api.enums.ManutencaoStatus;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -23,6 +25,17 @@ public class Manutencao {
 	@Column
 	private String man_hora;
 	
+	@Column
+	private Integer man_status;
+	
+	public ManutencaoStatus getMan_status() {
+		return ManutencaoStatus.valueOf(man_status);
+	}
+
+	public void setMan_status(Integer man_status) {
+		this.man_status = man_status;
+	}
+
 	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	private Administrador man_administrador_id;
 	

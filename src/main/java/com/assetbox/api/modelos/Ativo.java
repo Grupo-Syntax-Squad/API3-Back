@@ -1,5 +1,7 @@
 package com.assetbox.api.modelos;
 
+import com.assetbox.api.enums.AtivoStatus;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -25,7 +27,7 @@ public class Ativo {
 	private String ati_tipo;
 	
 	@Column
-	private String ati_status;
+	private Integer ati_status;
 	
 	@Column
 	private String ati_complemento;
@@ -122,11 +124,11 @@ public class Ativo {
 		this.ati_tipo = ati_tipo;
 	}
 
-	public String getAti_status() {
-		return ati_status;
+	public AtivoStatus getAti_status() {
+		return AtivoStatus.valueOf(ati_ano_fabricacao);
 	}
 
-	public void setAti_status(String ati_status) {
+	public void setAti_status(Integer ati_status) {
 		this.ati_status = ati_status;
 	}
 
