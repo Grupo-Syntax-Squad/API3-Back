@@ -12,7 +12,7 @@ public class ApiApplication {
 	public static void main(String[] args) {
 		Map<String, Object> configuracao = new HashMap<>();
 
-		configuracao.put("server.port", "8080"); // seleção da porta
+		configuracao.put("server.port", "8000"); // seleção da porta
 
 		configuracao.put("spring.datasource.url", "jdbc:mysql://localhost:3306/assetbox");
 		
