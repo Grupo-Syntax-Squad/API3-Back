@@ -1,5 +1,7 @@
 package com.assetbox.api.modelos;
 
+import org.springframework.cglib.core.Local;
+
 import com.assetbox.api.enums.AtivoStatus;
 
 import jakarta.persistence.CascadeType;
@@ -113,20 +115,20 @@ public class Ativo {
 		this.ati_nome = ati_nome;
 	}
 
-	public String getAti_localizacao() {
-		return ati_localizacao;
+	public Localizacao getAti_localizacao() {
+		return ati_localizacao_id;
 	}
 
-	public void setAti_localizacao(String ati_localizacao) {
-		this.ati_localizacao = ati_localizacao;
+	public void setAti_localizacao(Localizacao ati_localizacao_id) {
+		this.ati_localizacao_id = ati_localizacao_id;
 	}
 
-	public String getAti_tipo() {
-		return ati_tipo;
+	public Tipo getAti_tipo() {
+		return ati_tipo_id;
 	}
 
-	public void setAti_tipo(String ati_tipo) {
-		this.ati_tipo = ati_tipo;
+	public void setAti_tipo(Tipo ati_tipo_id) {
+		this.ati_tipo_id = ati_tipo_id;
 	}
 
 	public AtivoStatus getAti_status() {
