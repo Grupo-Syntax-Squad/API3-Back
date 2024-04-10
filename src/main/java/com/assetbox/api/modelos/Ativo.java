@@ -8,6 +8,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 
 
@@ -20,11 +23,13 @@ public class Ativo {
 	@Column
 	private String ati_nome;
 	
-	@Column
-	private String ati_localizacao;
+	@ManyToOne
+	@JoinColumn(name = "ati_localizacao_id", referencedColumnName = "loc_id")
+	private Localizacao ati_localizacao_id;
 	
-	@Column
-	private String ati_tipo;
+	@ManyToOne
+	@JoinColumn(name = "ati_tipo_id", referencedColumnName = "tip_id")
+	private Tipo ati_tipo_id;
 	
 	@Column
 	private Integer ati_status;

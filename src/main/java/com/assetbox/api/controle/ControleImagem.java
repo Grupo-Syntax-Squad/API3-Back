@@ -27,18 +27,32 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @RestController
 public class ControleImagem {
+
+    private class Getimg {
+        private String caminho;
+
+        public String getCaminho() {
+            return caminho;
+        }
+
+        public void setCaminho(String caminho) {
+            this.caminho = caminho;
+        }
+        
+    }
+
     @Autowired
     private RepositorioImagem repositorioImagem;
 
     @GetMapping("/imagem")
-    public ResponseEntity<InputStreamResource> getImagem(@RequestBody String caminhoImagem) {
-        Path caminhoAbsoluto = Paths.get(caminhoImagem);
+    public ResponseEntity<InputStreamResource> getImagem(@RequestBody Getimg caminhoImagem) {
+        Path caminhoAbsoluto = Paths.get(caminhoImagem.getCaminho());
 
         if (!Files.exists(caminhoAbsoluto)) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
 
-        InputStream inputStream = getClass().getResourceAsStream(caminhoImagem);
+        InputStream inputStream = getClass().getResourceAsStream(caminhoImagem.getCaminho());
 
         return ResponseEntity.ok()
             .contentType(MediaType.parseMediaType("image/*"))
