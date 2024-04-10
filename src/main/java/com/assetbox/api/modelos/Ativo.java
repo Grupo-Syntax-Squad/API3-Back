@@ -46,7 +46,7 @@ public class Ativo {
 	@Column
 	private String ati_modelo;
 
-	@Column
+	@Column(unique=true)
 	private String ati_numero_serie;
 	
 	@Column
@@ -67,7 +67,7 @@ public class Ativo {
 	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	private Administrador ati_administrador_id;
 	
-	@Column 
+	@Column(unique=true)
 	private String ati_chave_nf_e;
 	
 	@Column

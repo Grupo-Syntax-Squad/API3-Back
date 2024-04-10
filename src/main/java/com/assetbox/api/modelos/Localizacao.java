@@ -12,7 +12,7 @@ public class Localizacao {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long loc_id;
 
-    @Column
+    @Column(nullable = false)
     private String loc_titulo;
 
     public Long getLoc_id() {

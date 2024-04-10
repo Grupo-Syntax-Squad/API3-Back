@@ -15,7 +15,7 @@ public class Imagem {
 	@Column
 	private String ima_nome;
 	
-	@Column
+	@Column(nullable = false)
 	private String ima_caminho;
 
 	public Long getIma_id() {

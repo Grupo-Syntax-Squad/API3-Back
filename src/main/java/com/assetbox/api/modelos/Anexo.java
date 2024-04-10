@@ -20,7 +20,7 @@ public class Anexo {
 	@Column
 	private String ane_nome;
 
-	@Column
+	@Column(nullable = false)
 	private String ane_caminho;
 
 	public Long getAne_id() {

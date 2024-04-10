@@ -29,7 +29,7 @@ public class ControleAtivo {
 	@PostMapping("/cadastrar/ativo")
 	public void cadastrarAtivo(@RequestBody Ativo ativo) {
 	}
-	
+
 	@GetMapping("/ativo/{id}")
 	public ResponseEntity<Ativo> obterAtivo(@PathVariable long id) {
 		Optional<Ativo> ativo = ativoRepositorio.findById(id);

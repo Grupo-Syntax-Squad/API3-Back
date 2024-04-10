@@ -19,6 +19,17 @@ public class Fornecedor {
 	
 	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	private Endereco for_endereco_id;
+	
+	@Column(nullable = false)
+	private String for_telefone;
+
+	public String getFor_telefone() {
+		return for_telefone;
+	}
+
+	public void setFor_telefone(String for_telefone) {
+		this.for_telefone = for_telefone;
+	}
 
 	public Long getFor_id() {
 		return for_id;

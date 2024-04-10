@@ -19,13 +19,13 @@ public class Manutencao {
 	@Column
 	private String man_descricao;
 	
-	@Column
+	@Column(nullable = false)
 	private String man_data;
 	
 	@Column
 	private String man_hora;
 	
-	@Column
+	@Column(nullable = false)
 	private Integer man_status;
 	
 	public ManutencaoStatus getMan_status() {

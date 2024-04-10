@@ -12,10 +12,10 @@ public class Endereco {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long end_id;
 	
-	@Column
+	@Column(nullable = false)
 	private String end_numero;
 	
-	@Column
+	@Column(nullable = false)
 	private String end_rua;
 	
 	@Column
@@ -24,11 +24,14 @@ public class Endereco {
 	@Column
 	private String end_cidade;
 	
-	@Column
+	@Column(nullable = false)
 	private String end_uf;
 	
 	@Column
 	private String end_complemento;
+	
+	@Column(nullable = false)
+	private double end_cep;
 
 	public Long getEnd_id() {
 		return end_id;

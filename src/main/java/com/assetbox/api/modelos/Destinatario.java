@@ -14,16 +14,16 @@ public class Destinatario {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long des_id;
 	
-	@Column
+	@Column(nullable = false)
 	private String des_nome;
 	
-	@Column
+	@Column(nullable = false)
 	private String des_email;
 	
-	@Column
+	@Column(nullable = false)
 	private String des_senha;
 	
-	@Column
+	@Column(nullable = false)
 	private String des_telefone;
 	
 	@Column
