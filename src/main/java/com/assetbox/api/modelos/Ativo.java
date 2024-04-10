@@ -1,6 +1,5 @@
 package com.assetbox.api.modelos;
 
-import org.springframework.cglib.core.Local;
 
 import com.assetbox.api.enums.AtivoStatus;
 
@@ -12,7 +11,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 
 

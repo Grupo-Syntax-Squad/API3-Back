@@ -3,7 +3,6 @@ package com.assetbox.api.controle;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.assetbox.api.modelos.Ativo;
 import com.assetbox.api.modelos.Imagem;
 import com.assetbox.api.repositorio.RepositorioImagem;
 
