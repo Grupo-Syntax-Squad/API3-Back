@@ -1,0 +1,30 @@
+Ativos:
+{
+	"ati_localizacao_id": {
+		"loc_id": 1,
+		"loc_titulo": "Setor A"
+	},
+	"ati_tipo_id": {
+		"tip_id": 1,
+		"tip_titulo": "Computador"
+	},
+	"ati_status": "1",
+	"ati_complemento": "",
+	"ati_marca": "Positivo",
+	"ati_modelo": "Home",
+	"ati_numero_serie": 123456,
+	"ati_quantiadade": 20,
+	"ati_data_expiracao": "2024-10-10",
+	"ati_previsao_manutencao": "2024-08-02",
+	"ati_preco_aquisicao": 50000.00,
+	"ati_chave_nf_e": "35220407742965000106550010001010021130020352",
+	"ati_observacao": "",
+	"ati_url": "",
+	"ati_numero": 1,
+	"ati_manutencoes_feitas": 3,
+	"ati_ultima_manutencao": "2024-10-04",
+	"ati_ano_fabricacao": "2024",
+	"ati_titulo": "Computadores Dell",
+	"ati_capacidade": "500GB de memória",
+	"ati_tamanho": "30x20x6"
+}

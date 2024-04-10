@@ -24,11 +24,11 @@ public class Ativo {
 	private String ati_nome;
 	
 	@ManyToOne
-	@JoinColumn(name = "ati_localizacao_id", referencedColumnName = "loc_id")
+	@JoinColumn(name = "ati_localizacao_id")
 	private Localizacao ati_localizacao_id;
 	
 	@ManyToOne
-	@JoinColumn(name = "ati_tipo_id", referencedColumnName = "tip_id")
+	@JoinColumn(name = "ati_tipo_id")
 	private Tipo ati_tipo_id;
 	
 	@Column

@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,26 +20,26 @@ import org.springframework.web.bind.annotation.PostMapping;
 @RestController
 public class ControleAtivo {
 	@Autowired
-	private RepositorioAtivo ativoRepositorio;
+	private RepositorioAtivo repositorioAtivo;
 
 	@GetMapping("/ativos")
 	public List<Ativo> obterAtivos() {
-		return ativoRepositorio.findAll();
+		return repositorioAtivo.findAll();
 	}
 
 	@PostMapping("/cadastrar/ativo")
-	public void cadastrarAtivo(@RequestBody Ativo ativo) {
+	public ResponseEntity<Ativo> cadastrarAtivo(@RequestBody Ativo ativo) {
+		return ResponseEntity.ok(repositorioAtivo.save(ativo));
 	}
 
 	@GetMapping("/ativo/{id}")
-	public ResponseEntity<Ativo> obterAtivo(@PathVariable long id) {
-		Optional<Ativo> ativo = ativoRepositorio.findById(id);
+	public ResponseEntity<Optional<Ativo>> obterAtivo(@PathVariable long id) {
+		Optional<Ativo> ativo = repositorioAtivo.findById(id);
 		if (ativo == null) {
-			ResponseEntity<Ativo> resposta = new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			ResponseEntity<Optional<Ativo>> resposta = new ResponseEntity<>(HttpStatus.NOT_FOUND);
 			return resposta;
 		}  else {
-			ResponseEntity<Ativo> resposta = new ResponseEntity<Ativo>(HttpStatus.FOUND);
-			return resposta;
+			return ResponseEntity.ok(ativo);
 		}
 	}
 }
