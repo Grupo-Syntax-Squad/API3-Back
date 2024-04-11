@@ -28,3 +28,31 @@ Ativos:
 	"ati_capacidade": "500GB de memória",
 	"ati_tamanho": "30x20x6"
 }
+
+{
+	"ati_nome": "",
+	"ati_localizacao_id": "",
+	"ati_tipo_id": "",
+	"ati_status": "",
+	"ati_complemento": "",
+	"ati_destinatario_id": "",
+	"ati_marca": "",
+	"ati_modelo": "",
+	"ati_numero_serie": "",
+	"ati_quantidade": "",
+	"ati_condicoes_uso": "",
+	"ati_data_expiracao": "",
+	"ati_previsao_manutencao": "",
+	"ati_preco_aquisicao": "",
+	"ati_administrador_id": "",
+	"ati_chave_nf_e": "",
+	"ati_observacao": "",
+	"ati_url": "",
+	"ati_numero": "",
+	"ati_manutencoes_feitas": "",
+	"ati_ultima_manutencao": "",
+	"ati_ano_fabricacao": "",
+	"ati_titulo": "",
+	"ati_capacidade": "",
+	"ati_tamanho": ""
+}

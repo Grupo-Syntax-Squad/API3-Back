@@ -1,11 +1,15 @@
 package com.assetbox.api.modelos;
 
 
+import java.sql.Date;
+
 import com.assetbox.api.enums.AtivoStatus;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -20,9 +24,6 @@ public class Ativo {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long ati_id;
 	
-	@Column
-	private String ati_nome;
-	
 	@ManyToOne
 	@JoinColumn(name = "ati_localizacao_id")
 	private Localizacao ati_localizacao_id;
@@ -32,13 +33,20 @@ public class Ativo {
 	private Tipo ati_tipo_id;
 	
 	@Column
-	private Integer ati_status;
+	private Long ati_imagem_id;
+
+	// @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+	// private Administrador ati_administrador_id;
+
+	// @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+	// private Destinatario ati_destinatario_id;
+
+	@Enumerated(EnumType.STRING)
+	@Column(name = "ati_status")
+	private AtivoStatus ati_status;
 	
 	@Column
 	private String ati_complemento;
-	
-	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-	private Destinatario ati_destinatario_id;
 	
 	@Column
 	private String ati_marca;
@@ -56,16 +64,13 @@ public class Ativo {
 	private String ati_condicoes_uso;
 	
 	@Column
-	private String ati_data_expiracao;
+	private Date ati_data_expiracao;
 	
 	@Column
-	private String ati_previsao_manutencao;
+	private Date ati_previsao_manutencao;
 	
 	@Column
 	private double ati_preco_aquisicao;
-	
-	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-	private Administrador ati_administrador_id;
 	
 	@Column(unique=true)
 	private String ati_chave_nf_e;
@@ -80,10 +85,10 @@ public class Ativo {
 	private String ati_numero;
 	
 	@Column
-	private double ati_manutencoes_feitas;
+	private String ati_manutencoes_feitas;
 	
 	@Column
-	private String ati_ultima_manutencao;
+	private Date ati_ultima_manutencao;
 	
 	@Column
 	private String ati_ano_fabricacao;
@@ -105,35 +110,35 @@ public class Ativo {
 		this.ati_id = ati_id;
 	}
 
-	public String getAti_nome() {
-		return ati_nome;
-	}
-
-	public void setAti_nome(String ati_nome) {
-		this.ati_nome = ati_nome;
-	}
-
-	public Localizacao getAti_localizacao() {
+	public Localizacao getAti_localizacao_id() {
 		return ati_localizacao_id;
 	}
 
-	public void setAti_localizacao(Localizacao ati_localizacao_id) {
+	public void setAti_localizacao_id(Localizacao ati_localizacao_id) {
 		this.ati_localizacao_id = ati_localizacao_id;
 	}
 
-	public Tipo getAti_tipo() {
+	public Tipo getAti_tipo_id() {
 		return ati_tipo_id;
 	}
 
-	public void setAti_tipo(Tipo ati_tipo_id) {
+	public void setAti_tipo_id(Tipo ati_tipo_id) {
 		this.ati_tipo_id = ati_tipo_id;
 	}
 
-	public AtivoStatus getAti_status() {
-		return AtivoStatus.valueOf(ati_ano_fabricacao);
+	public Long getAti_imagem_id() {
+		return ati_imagem_id;
 	}
 
-	public void setAti_status(Integer ati_status) {
+	public void setAti_imagem_id(Long ati_imagem_id) {
+		this.ati_imagem_id = ati_imagem_id;
+	}
+
+	public AtivoStatus getAti_status() {
+		return ati_status;
+	}
+
+	public void setAti_status(AtivoStatus ati_status) {
 		this.ati_status = ati_status;
 	}
 
@@ -143,14 +148,6 @@ public class Ativo {
 
 	public void setAti_complemento(String ati_complemento) {
 		this.ati_complemento = ati_complemento;
-	}
-
-	public Destinatario getAti_destinatario_id() {
-		return ati_destinatario_id;
-	}
-
-	public void setAti_destinatario_id(Destinatario ati_destinatario_id) {
-		this.ati_destinatario_id = ati_destinatario_id;
 	}
 
 	public String getAti_marca() {
@@ -193,19 +190,19 @@ public class Ativo {
 		this.ati_condicoes_uso = ati_condicoes_uso;
 	}
 
-	public String getAti_data_expiracao() {
+	public Date getAti_data_expiracao() {
 		return ati_data_expiracao;
 	}
 
-	public void setAti_data_expiracao(String ati_data_expiracao) {
+	public void setAti_data_expiracao(Date ati_data_expiracao) {
 		this.ati_data_expiracao = ati_data_expiracao;
 	}
 
-	public String getAti_previsao_manutencao() {
+	public Date getAti_previsao_manutencao() {
 		return ati_previsao_manutencao;
 	}
 
-	public void setAti_previsao_manutencao(String ati_previsao_manutencao) {
+	public void setAti_previsao_manutencao(Date ati_previsao_manutencao) {
 		this.ati_previsao_manutencao = ati_previsao_manutencao;
 	}
 
@@ -215,14 +212,6 @@ public class Ativo {
 
 	public void setAti_preco_aquisicao(double ati_preco_aquisicao) {
 		this.ati_preco_aquisicao = ati_preco_aquisicao;
-	}
-
-	public Administrador getAti_administrador_id() {
-		return ati_administrador_id;
-	}
-
-	public void setAti_administrador_id(Administrador ati_administrador_id) {
-		this.ati_administrador_id = ati_administrador_id;
 	}
 
 	public String getAti_chave_nf_e() {
@@ -257,19 +246,19 @@ public class Ativo {
 		this.ati_numero = ati_numero;
 	}
 
-	public double getAti_manutencoes_feitas() {
+	public String getAti_manutencoes_feitas() {
 		return ati_manutencoes_feitas;
 	}
 
-	public void setAti_manutencoes_feitas(double ati_manutencoes_feitas) {
+	public void setAti_manutencoes_feitas(String ati_manutencoes_feitas) {
 		this.ati_manutencoes_feitas = ati_manutencoes_feitas;
 	}
 
-	public String getAti_ultima_manutencao() {
+	public Date getAti_ultima_manutencao() {
 		return ati_ultima_manutencao;
 	}
 
-	public void setAti_ultima_manutencao(String ati_ultima_manutencao) {
+	public void setAti_ultima_manutencao(Date ati_ultima_manutencao) {
 		this.ati_ultima_manutencao = ati_ultima_manutencao;
 	}
 
@@ -304,5 +293,6 @@ public class Ativo {
 	public void setAti_tamanho(String ati_tamanho) {
 		this.ati_tamanho = ati_tamanho;
 	}
+
 	
 }

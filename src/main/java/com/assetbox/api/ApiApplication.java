@@ -26,5 +26,4 @@ public class ApiApplication {
 		app.setDefaultProperties(configuracao);
 		app.run(args);
 	}
-
 }

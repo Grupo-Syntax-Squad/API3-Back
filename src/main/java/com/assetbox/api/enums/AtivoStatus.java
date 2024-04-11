@@ -1,27 +1,26 @@
 package com.assetbox.api.enums;
 
 public enum AtivoStatus {
-	EM_OPERACAO(1),
-	OCIOSO(2),
-	EM_MANUTENCAO(3),
-	DESATIVADO(4);
+	EM_OPERACAO("1"),
+	OCIOSO("2"),
+	EM_MANUTENCAO("3"),
+	DESATIVADO("4");
 	
-	private int code;
+	private String status;
 	
-	private AtivoStatus(int code) {
-		this.code = code;
+	private AtivoStatus(String status) {
+		this.status = status;
 	}
 
-	public int getCode() {
-		return code;
+	public String getCode() {
+		return status;
 	}
-	
-	public static AtivoStatus valueOf (int code) {
-		for (AtivoStatus value : AtivoStatus.values()) {
-			if (code == value.getCode()) {
-				return value;
-			}
-		}
-		throw new IllegalArgumentException("Código de status inválido!");
-	}
+	// public static AtivoStatus valueOf (int code) {
+	// 	for (AtivoStatus value : AtivoStatus.values()) {
+	// 		if (status == value.getCode()) {
+	// 			return value;
+	// 		}
+	// 	}
+	// 	throw new IllegalArgumentException("Código de status inválido!");
+	// }
 }
