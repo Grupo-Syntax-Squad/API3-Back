@@ -45,29 +45,25 @@ public class ControleImagem {
     @Autowired
     private RepositorioImagem repositorioImagem;
 
-    @GetMapping("/imagem/{id}")
-    public ResponseEntity<ByteArrayResource> getImageById(@PathVariable Long id) {
+    @GetMapping(value = "/imagem/{id}", produces = MediaType.IMAGE_JPEG_VALUE)
+    public ResponseEntity<byte[]> getImageById(@PathVariable Long id) {
         Optional<Imagem> optionalImage = repositorioImagem.findById(id);
         if (optionalImage.isPresent()) {
             Imagem imagem = optionalImage.get();
-            Path path = Path.of(imagem.getIma_caminho()); // Supondo que getCaminho() retorna o caminho da imagem
-            byte[] imageBytes;
+            String caminhoDaImagem = imagem.getIma_caminho();
+
+            // Ler o arquivo de imagem do disco
             try {
-                imageBytes = Files.readAllBytes(path);
+                Path path = Paths.get(caminhoDaImagem);
+                byte[] imageBytes = Files.readAllBytes(path);
+
+                return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(imageBytes);
             } catch (IOException e) {
-                // Lidar com exceções de leitura de arquivo
                 e.printStackTrace();
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
             }
-            
-            // Inicialize o ByteArrayResource com os bytes da imagem
-            ByteArrayResource resource = new ByteArrayResource(imageBytes);
-            
-            return ResponseEntity.ok()
-                    .contentLength(imageBytes.length)
-                    .body(resource);
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            return ResponseEntity.notFound().build();
         }
     }
 
