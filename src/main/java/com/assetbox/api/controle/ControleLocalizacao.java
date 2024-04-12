@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,17 +25,35 @@ public class ControleLocalizacao {
     private RepositorioLocalizacao repositorioLocalizacao;
 
     @GetMapping("/localizacoes")
-    public ResponseEntity<List<Localizacao>> getLocalizacoes() {
-        return ResponseEntity.ok().body(repositorioLocalizacao.findAll());
+    public List<Localizacao> getLocalizacoes() {
+    	try {
+            List<Localizacao> listaLocalizacoes = repositorioLocalizacao.findAll();
+            return listaLocalizacoes.isEmpty() ? null : listaLocalizacoes;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @GetMapping("/localizacao/{id}")
     public ResponseEntity<Optional<Localizacao>> getLocalizacao(@RequestParam Long id) {
-        return ResponseEntity.ok().body(repositorioLocalizacao.findById(id));
+    	Optional<Localizacao> localizacao = repositorioLocalizacao.findById(id);
+    	if (localizacao == null) {
+    		ResponseEntity<Optional<Localizacao>> resposta = new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    		return resposta;
+    	} else {
+    		return ResponseEntity.ok(localizacao);
+    	}
     }
     
-    @PostMapping("/localizacao")
+    @PostMapping("cadastrar/localizacao")
     public ResponseEntity<Localizacao> postLocalizacao(@RequestBody Localizacao localizacao) {
-        return ResponseEntity.ok().body(repositorioLocalizacao.save(localizacao));
+    	try {
+            Localizacao novaLocalizacao = repositorioLocalizacao.save(localizacao);
+            return ResponseEntity.ok(novaLocalizacao);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
     }
 }

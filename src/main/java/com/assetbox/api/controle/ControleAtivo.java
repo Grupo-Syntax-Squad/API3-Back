@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -41,4 +42,15 @@ public class ControleAtivo {
 			return ResponseEntity.ok(ativo);
 		}
 	}
+	@DeleteMapping("deletar/ativo/{id}")
+    public ResponseEntity<String> deletarAtivo(@PathVariable long id) {
+        Optional<Ativo> ativo = repositorioAtivo.findById(id);
+        if (ativo.isPresent()) {
+            repositorioAtivo.deleteById(id);
+            return ResponseEntity.ok("Ativo deletado com sucesso");
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+	
 }
