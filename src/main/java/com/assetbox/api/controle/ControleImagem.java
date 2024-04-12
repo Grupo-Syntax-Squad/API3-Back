@@ -11,9 +11,12 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -22,8 +25,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
-
-
 
 @RestController
 public class ControleImagem {
@@ -38,41 +39,35 @@ public class ControleImagem {
         public void setCaminho(String caminho) {
             this.caminho = caminho;
         }
-        
+
     }
 
     @Autowired
     private RepositorioImagem repositorioImagem;
 
     @GetMapping("/imagem/{id}")
-    public ResponseEntity<InputStreamResource> getImagem(@PathVariable Long id) {
-        Imagem imagem = repositorioImagem.findById(id).orElse(null);
-    
-        if (imagem == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-        }
-
-        String caminhoImagem = imagem.getIma_caminho();
-        Path caminhoAbsoluto = Paths.get(caminhoImagem);
-
-        if (!Files.exists(caminhoAbsoluto)) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-        }
-
-        try (InputStream inputStream = Files.newInputStream(caminhoAbsoluto)) {
-            // Obter o tipo de mídia apropriado com base no tipo de imagem
-            String contentType = Files.probeContentType(caminhoAbsoluto);
-            if (contentType == null) {
-                contentType = "application/octet-stream"; // Tipo de mídia genérico se não puder ser detectado
+    public ResponseEntity<ByteArrayResource> getImageById(@PathVariable Long id) {
+        Optional<Imagem> optionalImage = repositorioImagem.findById(id);
+        if (optionalImage.isPresent()) {
+            Imagem imagem = optionalImage.get();
+            Path path = Path.of(imagem.getIma_caminho()); // Supondo que getCaminho() retorna o caminho da imagem
+            byte[] imageBytes;
+            try {
+                imageBytes = Files.readAllBytes(path);
+            } catch (IOException e) {
+                // Lidar com exceções de leitura de arquivo
+                e.printStackTrace();
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
             }
-
+            
+            // Inicialize o ByteArrayResource com os bytes da imagem
+            ByteArrayResource resource = new ByteArrayResource(imageBytes);
+            
             return ResponseEntity.ok()
-                .contentType(MediaType.parseMediaType(contentType))
-                .body(new InputStreamResource(inputStream));
-        } catch (IOException e) {
-            // Lidar com a exceção de IO (por exemplo, registrar, lançar uma exceção personalizada, etc.)
-            e.printStackTrace(); // Aqui estamos apenas imprimindo a pilha de exceção, você pode personalizar isso conforme necessário
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+                    .contentLength(imageBytes.length)
+                    .body(resource);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
 
@@ -83,7 +78,7 @@ public class ControleImagem {
                 byte[] bytes = file.getBytes();
                 Path path = Paths.get("./src/main/resources/imgs/" + file.getOriginalFilename());
                 Files.write(path, bytes);
-                
+
                 Imagem imagem = new Imagem();
                 imagem.setIma_caminho("./src/main/resources/imgs/" + file.getOriginalFilename());
                 imagem.setIma_nome(file.getOriginalFilename());

@@ -31,8 +31,14 @@ Ativos:
 
 {
 	"ati_nome": "",
-	"ati_localizacao_id": "",
-	"ati_tipo_id": "",
+	"ati_localizacao_id": {
+		"loc_id": 1,
+		"loc_titulo": ""
+	},
+	"ati_tipo_id": {
+		"tip_id": 1,
+		"tip_titulo": ""
+	},
 	"ati_status": "",
 	"ati_complemento": "",
 	"ati_destinatario_id": "",
