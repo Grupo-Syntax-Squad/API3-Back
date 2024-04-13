@@ -33,7 +33,7 @@ public class ControleTipo {
         return ResponseEntity.ok().body(repositorioTipo.findById(id));
     }
     
-    @PostMapping("/tipo")
+    @PostMapping("/cadastrar/tipo")
     public ResponseEntity<Tipo> postTipo(@RequestBody Tipo tipo) {
         return ResponseEntity.ok().body(repositorioTipo.save(tipo));
     }

@@ -46,7 +46,7 @@ public class ControleLocalizacao {
     	}
     }
     
-    @PostMapping("cadastrar/localizacao")
+    @PostMapping("/cadastrar/localizacao")
     public ResponseEntity<Localizacao> postLocalizacao(@RequestBody Localizacao localizacao) {
     	try {
             Localizacao novaLocalizacao = repositorioLocalizacao.save(localizacao);
