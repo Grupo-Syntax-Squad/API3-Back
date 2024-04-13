@@ -54,8 +54,8 @@ public class ControleDestinatario {
 		}
 	}
 	
-	@DeleteMapping("deletar/ativo/{id}")
-    public ResponseEntity<String> deletarAtivo(@PathVariable long id) {
+	@DeleteMapping("deletar/destinatario/{id}")
+    public ResponseEntity<String> deletarDestinatario(@PathVariable long id) {
         Optional<Destinatario> ativo = repositorioDestinatario.findById(id);
         if (ativo.isPresent()) {
             repositorioDestinatario.deleteById(id);
