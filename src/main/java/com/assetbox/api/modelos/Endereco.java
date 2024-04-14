@@ -88,5 +88,13 @@ public class Endereco {
 	public void setEnd_complemento(String end_complemento) {
 		this.end_complemento = end_complemento;
 	}
+
+	public String getEnd_cep() {
+		return end_cep;
+	}
+
+	public void setEnd_cep(String end_cep) {
+		this.end_cep = end_cep;
+	}
 	
 }

@@ -5,6 +5,7 @@ import java.sql.Date;
 
 import com.assetbox.api.enums.AtivoStatus;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -14,6 +15,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 
 
 @Entity
@@ -36,8 +38,9 @@ public class Ativo {
 	// @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	// private Administrador ati_administrador_id;
 
-	// @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-	// private Destinatario ati_destinatario_id;
+	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "ati_destinatario_id")
+	private Destinatario ati_destinatario_id;
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "ati_status")
