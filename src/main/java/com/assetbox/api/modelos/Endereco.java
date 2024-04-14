@@ -31,7 +31,7 @@ public class Endereco {
 	private String end_complemento;
 	
 	@Column(nullable = false)
-	private double end_cep;
+	private String end_cep;
 
 	public Long getEnd_id() {
 		return end_id;
