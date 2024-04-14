@@ -42,15 +42,14 @@ public class ControleAtivo {
 			return ResponseEntity.ok(ativo);
 		}
 	}
-	@DeleteMapping("deletar/ativo/{id}")
-    public ResponseEntity<String> deletarAtivo(@PathVariable long id) {
-        Optional<Ativo> ativo = repositorioAtivo.findById(id);
-        if (ativo.isPresent()) {
-            repositorioAtivo.deleteById(id);
-            return ResponseEntity.ok("Ativo deletado com sucesso");
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }
-	
+	@DeleteMapping("/ativo/{id}")
+	public ResponseEntity<Void> deletarAtivo(@PathVariable long id) {
+		Optional<Ativo> ativo = repositorioAtivo.findById(id);
+		if (ativo.isPresent()) {
+			repositorioAtivo.deleteById(id);
+			return ResponseEntity.noContent().build();
+		} else {
+			return ResponseEntity.notFound().build();
+		}
+	}
 }
