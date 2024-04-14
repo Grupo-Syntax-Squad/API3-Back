@@ -2,7 +2,7 @@
 
 ## Como rodar o projeto
 
-Primeiramente você deverá baixar a  pasta do projeto, que pode ser obtida através do seguinte link:[https://github.com/Grupo-Syntax-Squad/API3-Back/tree/88150faebaa7cd4b0b17cf9f4e87e99e51cfb3b4]https://github.com/Grupo-Syntax-Squad/API3-Back/tree/88150faebaa7cd4b0b17cf9f4e87e99e51cfb3b4
+Primeiramente você deverá baixar a  pasta do projeto, que pode ser obtida através do seguinte link:[https://github.com/Grupo-Syntax-Squad/API3-Back/tree/88150faebaa7cd4b0b17cf9f4e87e99e51cfb3b4](https://github.com/Grupo-Syntax-Squad/API3-Back/tree/88150faebaa7cd4b0b17cf9f4e87e99e51cfb3b4)
 
 baixando a pasta pelo navegador, clicando em "codigo" e depois em "baixar ZIP".
 
