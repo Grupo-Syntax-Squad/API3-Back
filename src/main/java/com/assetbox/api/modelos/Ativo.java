@@ -92,7 +92,7 @@ public class Ativo {
 	private Date ati_ultima_manutencao;
 	
 	@Column
-	private Date ati_data_fabricacao;
+	private String ati_ano_fabricacao;
 	
 	@Column
 	private String ati_titulo;
@@ -263,12 +263,12 @@ public class Ativo {
 		this.ati_ultima_manutencao = ati_ultima_manutencao;
 	}
 
-	public Date getAti_data_fabricacao() {
-		return ati_data_fabricacao;
+	public String getAti_ano_fabricacao() {
+		return ati_ano_fabricacao;
 	}
 
-	public void setAti_data_fabricacao(Date ati_data_fabricacao) {
-		this.ati_data_fabricacao = ati_data_fabricacao;
+	public void setAti_ano_fabricacao(String ati_ano_fabricacao) {
+		this.ati_ano_fabricacao = ati_ano_fabricacao;
 	}
 
 	public String getAti_titulo() {
