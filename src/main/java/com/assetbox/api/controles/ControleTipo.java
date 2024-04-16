@@ -1,9 +1,9 @@
-package com.assetbox.API.controles;
+package com.assetbox.api.controles;
 
 import org.springframework.web.bind.annotation.RestController;
 
-import com.assetbox.API.modelos.Tipo;
-import com.assetbox.API.repositorios.RepositorioTipo;
+import com.assetbox.api.modelos.Tipo;
+import com.assetbox.api.repositorios.RepositorioTipo;
 
 import java.util.List;
 

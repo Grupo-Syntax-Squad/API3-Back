@@ -1,4 +1,4 @@
-package com.assetbox.API.enums;
+package com.assetbox.api.enums;
 
 public enum AtiStatus {
     EM_OPERACAO,

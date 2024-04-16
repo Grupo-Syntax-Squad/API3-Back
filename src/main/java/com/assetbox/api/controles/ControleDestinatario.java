@@ -1,4 +1,4 @@
-package com.assetbox.API.controles;
+package com.assetbox.api.controles;
 
 import java.util.List;
 
@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.assetbox.API.modelos.Destinatario;
-import com.assetbox.API.repositorios.RepositorioDestinatario;
+import com.assetbox.api.modelos.Destinatario;
+import com.assetbox.api.repositorios.RepositorioDestinatario;
 
 @RestController
 public class ControleDestinatario {

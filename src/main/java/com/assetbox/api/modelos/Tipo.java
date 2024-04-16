@@ -1,4 +1,4 @@
-package com.assetbox.API.modelos;
+package com.assetbox.api.modelos;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

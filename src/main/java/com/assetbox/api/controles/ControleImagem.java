@@ -1,4 +1,4 @@
-package com.assetbox.API.controles;
+package com.assetbox.api.controles;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.assetbox.API.modelos.Imagem;
-import com.assetbox.API.repositorios.RepositorioImagem;
+import com.assetbox.api.modelos.Imagem;
+import com.assetbox.api.repositorios.RepositorioImagem;
 
 @RestController
 public class ControleImagem {

@@ -1,9 +1,9 @@
-package com.assetbox.API.modelos;
+package com.assetbox.api.modelos;
 
 
 import java.util.Date;
 
-import com.assetbox.API.enums.AtiStatus;
+import com.assetbox.api.enums.AtiStatus;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -46,7 +46,7 @@ public class Ativo {
     @Column
     private String ati_modelo;
 
-    @Column
+    @Column(nullable = false, unique = true)
     private String ati_numero_serie;
 
     @Column
@@ -58,19 +58,19 @@ public class Ativo {
     @Column
     private Date ati_previsao_manutencao;
 
-    @Column
+    @Column(nullable = false)
     private double ati_preco_aquisicao;
 
-    @Column
+    @Column(nullable = false, unique = true)
     private String ati_chave_nf_e;
 
     @Column
     private String ati_observacao;
 
-    @Column
+    @Column(unique = true)
     private String ati_url;
 
-    @Column
+    @Column(nullable = false, unique = true)
     private String ati_numero;
 
     @Column
@@ -91,7 +91,7 @@ public class Ativo {
     @Column
     private String ati_tamanho;
 
-    @Column
+    @Column(nullable = false)
     private Date ati_data_cadastro;
 
     @OneToOne

@@ -1,4 +1,4 @@
-package com.assetbox.API.controles;
+package com.assetbox.api.controles;
 
 import java.util.List;
 
@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.assetbox.API.modelos.Endereco;
-import com.assetbox.API.repositorios.RepositorioEndereco;
+import com.assetbox.api.modelos.Endereco;
+import com.assetbox.api.repositorios.RepositorioEndereco;
 
 @RestController
 public class ControleEndereco {

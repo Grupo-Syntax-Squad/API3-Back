@@ -1,8 +1,8 @@
-package com.assetbox.API.repositorios;
+package com.assetbox.api.repositorios;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.assetbox.API.modelos.Ativo;
+import com.assetbox.api.modelos.Ativo;
 
 public interface RepositorioAtivo extends JpaRepository<Ativo, Long>{
     
