@@ -1,4 +1,4 @@
-package com.assetbox.api.modelos;
+package com.assetbox.API.modelos;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,7 +12,7 @@ public class Localizacao {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long loc_id;
 
-    @Column(nullable = false)
+    @Column
     private String loc_titulo;
 
     public Long getLoc_id() {
@@ -29,5 +29,5 @@ public class Localizacao {
 
     public void setLoc_titulo(String loc_titulo) {
         this.loc_titulo = loc_titulo;
-    }    
+    }
 }

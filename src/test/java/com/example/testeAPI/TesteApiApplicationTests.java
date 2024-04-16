@@ -1,10 +1,10 @@
-package com.assetbox.api;
+package com.example.testeAPI;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ApiApplicationTests {
+class TesteApiApplicationTests {
 
 	@Test
 	void contextLoads() {

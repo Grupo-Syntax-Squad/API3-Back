@@ -1,4 +1,4 @@
-package com.assetbox.api.modelos;
+package com.assetbox.API.modelos;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -11,8 +11,8 @@ public class Tipo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long tip_id;
-
-    @Column
+    
+    @Column(nullable = false)
     private String tip_titulo;
 
     public Long getTip_id() {
