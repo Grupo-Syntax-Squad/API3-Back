@@ -23,7 +23,7 @@ public class Destinatario {
     @Column(nullable = false)
     private String des_telefone;
 
-    @Column(nullable = false)
+    @Column
     private String des_senha;
 
     @ManyToOne

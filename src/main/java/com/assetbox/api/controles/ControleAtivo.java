@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,5 +32,11 @@ public class ControleAtivo {
     @PostMapping("/ativos")
     public ResponseEntity<Ativo> postAtivo(@RequestBody Ativo ativo) {
         return ResponseEntity.ok().body(repositorioAtivo.save(ativo));
+    }
+
+    @DeleteMapping("/ativos/{id}")
+    public ResponseEntity<?> deleteAtivo(@PathVariable Long id) {
+        repositorioAtivo.deleteById(id);
+        return ResponseEntity.ok().build();
     }
 }
