@@ -23,28 +23,28 @@ public class Manutencao {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "man_ativo_id")
-    private Ativo man_ativo_id;
+    // @ManyToOne
+    // @JoinColumn(name = "man_ativo_id")
+    // private Ativo man_ativo_id;
 
     // @ManyToOne
     // @JoinColumn(name = "ma_administrador_id")
     // private Administrador man_administrador_id;
 
-    @ManyToOne
-    @JoinColumn(name = "man_endereco_id")
-    private Endereco man_endereco_id;
+    // @ManyToOne
+    // @JoinColumn(name = "man_endereco_id")
+    // private Endereco man_endereco_id;
 
-    @Column
+    @Column(nullable = false)
     private String man_desc;
     
-    @Column
+    @Column(nullable = false)
     private Date man_data;
 
-    @Column
-    private Time man_hora;
+    // @Column(nullable = false)
+    // private Time man_hora;
 
-    @Column
+    @Column(nullable = false)
     private String man_localizacao;
 
     @Enumerated(EnumType.STRING)
