@@ -30,11 +30,11 @@ public class ControleAdministrador {
 	}
 	
 	@PostMapping("/administradores")
-	public ResponseEntity<Administrador> postAdministrador(@RequestBody Administrador destinatario){
-		return ResponseEntity.ok().body(repositorioAdministrador.save(destinatario));
+	public ResponseEntity<Administrador> postAdministrador(@RequestBody Administrador administrador){
+		return ResponseEntity.ok().body(repositorioAdministrador.save(administrador));
 	}
 	
-	@DeleteMapping("/destinatarios/{id}")
+	@DeleteMapping("/administradores/{id}")
 	public ResponseEntity<?> deleteAdministrador(@PathVariable Long id) {
 		repositorioAdministrador.deleteById(id);
 		return ResponseEntity.ok().build();
