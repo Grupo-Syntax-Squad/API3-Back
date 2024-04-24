@@ -23,32 +23,32 @@ public class Manutencao {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long man_id;
 
-    @ManyToOne
-    @JoinColumn(name = "man_ativo_id")
-    private Ativo man_ativo_id;
+    @Column(nullable = false)
+    private String man_atividade;
+
+    @Column(nullable = false)
+    private Date man_data;
+
+    @Column(nullable = false)
+    private Time man_horario;
 
     // @ManyToOne
     // @JoinColumn(name = "ma_administrador_id")
     // private Administrador man_administrador_id;
 
     @ManyToOne
+    @JoinColumn(name = "man_ativo_id")
+    private Ativo man_ativo_id;
+
+    @ManyToOne
     @JoinColumn(name = "man_endereco_id")
     private Endereco man_endereco_id;
 
-    @Column(nullable = false)
-    private String man_desc;
-    
-    @Column(nullable = false)
-    private Date man_data;
-
-    @Column(nullable = false)
-    private Time man_hora;
-
-    @Column(nullable = false)
-    private String man_localizacao;
-
     @Enumerated(EnumType.STRING)
     private ManutencaoStatus man_status;
+
+    @Column(nullable = false)
+    private String man_responsavel;
 
     public Long getMan_id() {
         return man_id;
@@ -56,6 +56,30 @@ public class Manutencao {
 
     public void setMan_id(Long man_id) {
         this.man_id = man_id;
+    }
+
+    public String getMan_atividade() {
+        return man_atividade;
+    }
+
+    public void setMan_atividade(String man_atividade) {
+        this.man_atividade = man_atividade;
+    }
+
+    public Date getMan_data() {
+        return man_data;
+    }
+
+    public void setMan_data(Date man_data) {
+        this.man_data = man_data;
+    }
+
+    public Time getMan_horario() {
+        return man_horario;
+    }
+
+    public void setMan_horario(Time man_horario) {
+        this.man_horario = man_horario;
     }
 
     public Ativo getMan_ativo_id() {
@@ -74,43 +98,19 @@ public class Manutencao {
         this.man_endereco_id = man_endereco_id;
     }
 
-    public String getMan_desc() {
-        return man_desc;
-    }
-
-    public void setMan_desc(String man_desc) {
-        this.man_desc = man_desc;
-    }
-
-    public Date getMan_data() {
-        return man_data;
-    }
-
-    public void setMan_data(Date man_data) {
-        this.man_data = man_data;
-    }
-
-    public Time getMan_hora() {
-        return man_hora;
-    }
-
-    public void setMan_hora(Time man_hora) {
-        this.man_hora = man_hora;
-    }
-
-    public String getMan_localizacao() {
-        return man_localizacao;
-    }
-
-    public void setMan_localizacao(String man_localizacao) {
-        this.man_localizacao = man_localizacao;
-    }
-
     public ManutencaoStatus getMan_status() {
         return man_status;
     }
 
     public void setMan_status(ManutencaoStatus man_status) {
         this.man_status = man_status;
+    }
+
+    public String getMan_responsavel() {
+        return man_responsavel;
+    }
+
+    public void setMan_responsavel(String man_responsavel) {
+        this.man_responsavel = man_responsavel;
     }
 }
