@@ -67,7 +67,7 @@ public class Ativo {
     @Column
     private String ati_observacao;
 
-    @Column(unique = true)
+    @Column(unique = false)
     private String ati_url;
 
     @Column(nullable = false, unique = true)
