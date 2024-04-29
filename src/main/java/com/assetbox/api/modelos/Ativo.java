@@ -98,6 +98,10 @@ public class Ativo {
     @JoinColumn(name = "ati_imagem_id")
     private Imagem ati_imagem_id;
 
+    @OneToOne
+    @JoinColumn(name = "ati_documento_id")
+    private Documento ati_documento_id;
+
     @Column
     private String ati_condicoes_uso;
 
