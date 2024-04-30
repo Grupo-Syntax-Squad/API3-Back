@@ -2,6 +2,7 @@ package com.assetbox.api.controles;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import com.assetbox.api.enums.ManutencaoStatus;
 import com.assetbox.api.modelos.HistoricoManutencao;
 import com.assetbox.api.modelos.Manutencao;
 import com.assetbox.api.repositorios.RepositorioHistoricoManutencao;
@@ -41,8 +42,11 @@ public class ControleManutencao {
     public ResponseEntity<?> postManutencao(@RequestBody Manutencao manutencao) {
         try {
             Manutencao manutencaoEntidade = repositorioManutencao.save(manutencao);
-            HistoricoManutencao historicoManutencao = new HistoricoManutencao(manutencao.getMan_ativo_id(), manutencaoEntidade);
+            
+            HistoricoManutencao historicoManutencao = new HistoricoManutencao(manutencaoEntidade.getMan_ativo_id(), manutencaoEntidade.getMan_id(), manutencaoEntidade.getMan_atividade(), manutencaoEntidade.getMan_data(), manutencaoEntidade.getMan_horario(), manutencaoEntidade.getMan_status(), manutencaoEntidade.getMan_responsavel());
+            
             repositorioHistoricoManutencao.save(historicoManutencao);
+            
             return new ResponseEntity<Manutencao>(manutencaoEntidade, HttpStatus.OK);
         } catch(Exception e) {
             return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
@@ -58,9 +62,14 @@ public class ControleManutencao {
         }
     }
 
-        @DeleteMapping("/manutencoes/{id}")
+    @DeleteMapping("/manutencoes/{id}")
     public ResponseEntity<?> deleteAtivo(@PathVariable Long id) {
-        repositorioManutencao.deleteById(id);
+        Manutencao manutencao = repositorioManutencao.findById(id).get();
+        manutencao.setMan_status(ManutencaoStatus.CANCELADA);
+
+        HistoricoManutencao historicoManutencao = new HistoricoManutencao(manutencao.getMan_ativo_id(), manutencao.getMan_id(), manutencao.getMan_atividade(), manutencao.getMan_data(), manutencao.getMan_horario(), manutencao.getMan_status(), manutencao.getMan_responsavel());
+
+        repositorioManutencao.save(manutencao);
         return ResponseEntity.ok().build();
     }
 }
