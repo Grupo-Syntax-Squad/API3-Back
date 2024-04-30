@@ -15,16 +15,16 @@ public class Administrador {
 	private Long id;
 	
 	@Column
-	private String nome;
+	private String adm_nome;
 	
 	@Column
 	private String email;
 	
 	@Column
-	private String senha;
+	private String adm_senha;
 
 	@Column
-	private String telefone;
+	private String adm_telefone;
 
 //	@ManyToOne
 //	@JoinColumn(name = "adm_empresa_id")
@@ -33,11 +33,11 @@ public class Administrador {
 	public Administrador() {
 	}
 
-	public Administrador(String adm_nome, String adm_email, String adm_senha, String adm_telefone) {
-		this.nome = adm_nome;
-		this.email = adm_email;
-		this.senha = adm_senha;
-		this.telefone = adm_telefone;
+	public Administrador(String adm_nome, String email, String adm_senha, String adm_telefone) {
+		this.adm_nome = adm_nome;
+		this.email = email;
+		this.adm_senha = adm_senha;
+		this.adm_telefone = adm_telefone;
 	}
 
 	public Long getId() {
@@ -48,35 +48,38 @@ public class Administrador {
 		this.id = id;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getAdm_nome() {
+		return adm_nome;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setAdm_nome(String adm_nome) {
+		this.adm_nome = adm_nome;
 	}
 
-	public String getEmail() {
+	public String getAdm_email() {
 		return email;
 	}
 
-	public void setEmail(String email) {
+	public void setAdm_email(String email) {
 		this.email = email;
 	}
 
-	public String getSenha() {
-		return senha;
+	public String getAdm_senha() {
+		return adm_senha;
 	}
 
-	public void setSenha(String senha) {
-		this.senha = senha;
+	public void setAdm_senha(String adm_senha) {
+		this.adm_senha = adm_senha;
 	}
 
-	public String getTelefone() {
-		return telefone;
+	public String getAdm_telefone() {
+		return adm_telefone;
 	}
 
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
+	public void setAdm_telefone(String adm_telefone) {
+		this.adm_telefone = adm_telefone;
 	}
+
+	
+	
 }

@@ -20,7 +20,7 @@ public class ApiApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		if (repositorioAdministrador.count() == 0) {
-			Administrador administrador = new Administrador("admin", "admin@gmail.com", "123", "12999999999");
+			Administrador administrador = new Administrador("admin", "admin@gmail.com", "123", "(12) 99999-9999");
 			repositorioAdministrador.save(administrador);
 			System.out.println("Administrador cadastrado com sucesso!");
 		}

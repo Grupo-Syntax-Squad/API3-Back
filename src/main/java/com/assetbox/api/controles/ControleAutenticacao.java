@@ -29,7 +29,7 @@ public class ControleAutenticacao {
     public ResponseEntity postLogin(@RequestBody LoginDTO data) {
         Administrador administrador = repositorioAdministrador.findByEmail(data.email());
 
-        if (administrador == null || !administrador.getSenha().equals(data.senha())) {
+        if (administrador == null || !administrador.getAdm_senha().equals(data.senha())) {
             return ResponseEntity.badRequest().build();
         }
 
@@ -40,11 +40,11 @@ public class ControleAutenticacao {
 
     @PostMapping("registrar")
     public ResponseEntity postRegistrar(@RequestBody RegistrarDTO data) {
-        if (repositorioAdministrador.findByEmail(data.email()) != null) {
+        if (repositorioAdministrador.findByEmail(data.adm_email()) != null) {
             return ResponseEntity.badRequest().build();
         }
 
-        Administrador administrador = new Administrador(data.nome(), data.email(), data.senha(), data.telefone());
+        Administrador administrador = new Administrador(data.adm_nome(), data.adm_email(), data.adm_senha(), data.adm_telefone());
 
         repositorioAdministrador.save(administrador);
 
