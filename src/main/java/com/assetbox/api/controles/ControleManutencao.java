@@ -2,7 +2,9 @@ package com.assetbox.api.controles;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import com.assetbox.api.modelos.HistoricoManutencao;
 import com.assetbox.api.modelos.Manutencao;
+import com.assetbox.api.repositorios.RepositorioHistoricoManutencao;
 import com.assetbox.api.repositorios.RepositorioManutencao;
 
 import java.util.List;
@@ -23,6 +25,9 @@ public class ControleManutencao {
     @Autowired
     private RepositorioManutencao repositorioManutencao;
 
+    @Autowired
+    private RepositorioHistoricoManutencao repositorioHistoricoManutencao;
+
     @GetMapping("/manutencoes")
     public ResponseEntity<List<Manutencao>> getManutencoes() {
         try {
@@ -35,7 +40,10 @@ public class ControleManutencao {
     @PostMapping("/manutencoes")
     public ResponseEntity<?> postManutencao(@RequestBody Manutencao manutencao) {
         try {
-            return new ResponseEntity<Manutencao>(repositorioManutencao.save(manutencao), HttpStatus.OK);
+            Manutencao manutencaoEntidade = repositorioManutencao.save(manutencao);
+            HistoricoManutencao historicoManutencao = new HistoricoManutencao(manutencao.getMan_ativo_id(), manutencaoEntidade);
+            repositorioHistoricoManutencao.save(historicoManutencao);
+            return new ResponseEntity<Manutencao>(manutencaoEntidade, HttpStatus.OK);
         } catch(Exception e) {
             return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
         }
