@@ -12,7 +12,7 @@ import jakarta.persistence.Id;
 public class Administrador {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Long adm_id;
 	
 	@Column
 	private String adm_nome;
@@ -36,19 +36,20 @@ public class Administrador {
 	public Administrador() {
 	}
 
-	public Administrador(String adm_nome, String email, String adm_senha, String adm_telefone) {
+	public Administrador(String adm_nome, String email, String adm_senha, String adm_telefone, String adm_cpf) {
 		this.adm_nome = adm_nome;
 		this.email = email;
 		this.adm_senha = adm_senha;
 		this.adm_telefone = adm_telefone;
+		this.adm_cpf = adm_cpf;
 	}
 
-	public Long getId() {
-		return id;
+	public Long getAdm_id() {
+		return adm_id;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setAdm_id(Long id) {
+		this.adm_id = id;
 	}
 
 	public String getAdm_nome() {

@@ -44,7 +44,7 @@ public class ControleAutenticacao {
             return ResponseEntity.badRequest().build();
         }
 
-        Administrador administrador = new Administrador(data.adm_nome(), data.adm_email(), data.adm_senha(), data.adm_telefone());
+        Administrador administrador = new Administrador(data.adm_nome(), data.adm_email(), data.adm_senha(), data.adm_telefone(), data.adm_cpf());
 
         repositorioAdministrador.save(administrador);
 
