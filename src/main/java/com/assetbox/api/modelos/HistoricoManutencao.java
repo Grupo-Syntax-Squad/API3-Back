@@ -29,6 +29,9 @@ public class HistoricoManutencao {
     private Long his_manutencao_id;
 
     @Column
+    private Date his_data = new Date();
+
+    @Column
     private String man_atividade;
 
     @Column
@@ -80,6 +83,14 @@ public class HistoricoManutencao {
         this.his_manutencao_id = his_manutencao_id;
     }
 
+    public Date getHis_data() {
+        return his_data;
+    }
+
+    public void setHis_data(Date his_data) {
+        this.his_data = his_data;
+    }
+
     public String getMan_atividade() {
         return man_atividade;
     }
@@ -119,6 +130,4 @@ public class HistoricoManutencao {
     public void setMan_responsavel(String man_responsavel) {
         this.man_responsavel = man_responsavel;
     }
-
-    
 }

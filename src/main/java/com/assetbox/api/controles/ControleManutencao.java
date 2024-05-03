@@ -90,6 +90,10 @@ public class ControleManutencao {
             Manutencao manutencao = repositorioManutencao.findById(id).get();
             manutencao.setMan_status(atualizacao.getMan_status());
             repositorioManutencao.save(manutencao);
+            HistoricoManutencao historicoManutencao = new HistoricoManutencao(manutencao.getMan_ativo_id(),
+                    manutencao.getMan_id(), manutencao.getMan_atividade(), manutencao.getMan_data(),
+                    manutencao.getMan_horario(), manutencao.getMan_status(), manutencao.getMan_responsavel());
+            repositorioHistoricoManutencao.save(historicoManutencao);
             return new ResponseEntity<Manutencao>(manutencao, HttpStatus.OK);
         } catch(Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
