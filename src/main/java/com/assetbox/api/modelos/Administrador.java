@@ -25,6 +25,9 @@ public class Administrador {
 
 	@Column
 	private String adm_telefone;
+	
+	@Column(nullable = false, unique = true)
+	private String adm_cpf;
 
 //	@ManyToOne
 //	@JoinColumn(name = "adm_empresa_id")
@@ -80,6 +83,12 @@ public class Administrador {
 		this.adm_telefone = adm_telefone;
 	}
 
-	
+	public String getAdm_cpf() {
+		return adm_cpf;
+	}
+
+	public void setAdm_cpf(String adm_cpf) {
+		this.adm_cpf = adm_cpf;
+	}
 	
 }

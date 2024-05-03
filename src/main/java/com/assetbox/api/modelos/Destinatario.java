@@ -14,6 +14,9 @@ public class Destinatario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long des_id;
 
+    @Column(nullable = false, unique = true)
+    private String des_cpf;
+
     @Column(nullable = false)
     private String des_nome;
 
@@ -78,5 +81,11 @@ public class Destinatario {
         this.des_endereco_id = des_endereco_id;
     }
 
-    
+    public String getDes_cpf() {
+        return des_cpf;
+    }
+
+    public void setDes_cpf(String des_cpf) {
+        this.des_cpf = des_cpf;
+    }
 }
