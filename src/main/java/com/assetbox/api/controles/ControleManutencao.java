@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+
 
 @RestController
 @RequestMapping("manutencoes")
@@ -78,6 +80,18 @@ public class ControleManutencao {
             repositorioHistoricoManutencao.save(historicoManutencao);
             return new ResponseEntity<Manutencao>(repositorioManutencao.save(manutencao), HttpStatus.OK);
         } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PutMapping("{id}")
+    public ResponseEntity<Manutencao> putMethodName(@PathVariable Long id, @RequestBody Manutencao atualizacao) {
+        try {
+            Manutencao manutencao = repositorioManutencao.findById(id).get();
+            manutencao.setMan_status(atualizacao.getMan_status());
+            repositorioManutencao.save(manutencao);
+            return new ResponseEntity<Manutencao>(manutencao, HttpStatus.OK);
+        } catch(Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
