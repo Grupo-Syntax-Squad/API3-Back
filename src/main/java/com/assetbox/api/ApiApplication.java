@@ -1,29 +1,28 @@
 package com.assetbox.api;
 
-import java.util.HashMap;
-import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.assetbox.api.modelos.Administrador;
+import com.assetbox.api.repositorios.RepositorioAdministrador;
+
 @SpringBootApplication
-public class ApiApplication {
-
+public class ApiApplication implements CommandLineRunner {
+	@Autowired
+	RepositorioAdministrador repositorioAdministrador;
 	public static void main(String[] args) {
-		Map<String, Object> configuracao = new HashMap<>();
+		SpringApplication.run(ApiApplication.class, args);
+	}
 
-		configuracao.put("server.port", "8000"); // seleção da porta
-
-		configuracao.put("spring.datasource.url", "jdbc:mysql://localhost:3306/assetbox");
-		
-		configuracao.put("spring.datasource.username", "root"); // usuario
-		configuracao.put("spring.datasource.password", "fatec"); // senha
-		
-		configuracao.put("spring.jpa.show-sql", "true"); // mostrar comandos
-		configuracao.put("spring.jpa.hibernate.ddl-auto", "update"); // criar editar
-		
-		SpringApplication app = new SpringApplication(ApiApplication.class);
-		app.setDefaultProperties(configuracao);
-		app.run(args);
+	@Override
+	public void run(String... args) throws Exception {
+		if (repositorioAdministrador.count() == 0) {
+			Administrador administrador = new Administrador("admin", "admin@gmail.com", "123", "(12) 99999-9999", "12345678912");
+			repositorioAdministrador.save(administrador);
+			System.out.println("Administrador cadastrado com sucesso!");
+		}
 	}
 }

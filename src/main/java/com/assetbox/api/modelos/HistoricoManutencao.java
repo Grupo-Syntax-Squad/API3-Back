@@ -1,9 +1,7 @@
 package com.assetbox.api.modelos;
 
-
 import java.sql.Time;
 import java.util.Date;
-
 
 import com.assetbox.api.enums.ManutencaoStatus;
 
@@ -18,44 +16,79 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
 @Entity
-public class Manutencao {
+public class HistoricoManutencao {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long man_id;
+    private Long id;
 
-    @Column(nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "his_ativo_id")
+    private Ativo his_ativo_id;
+
+    @Column
+    private Long his_manutencao_id;
+
+    @Column
+    private Date his_data = new Date();
+
+    @Column
     private String man_atividade;
 
-    @Column(nullable = false)
+    @Column
     private Date man_data;
 
-    @Column(nullable = false)
+    @Column
     private Time man_horario;
-
-    // @ManyToOne
-    // @JoinColumn(name = "ma_administrador_id")
-    // private Administrador man_administrador_id;
-
-    @ManyToOne
-    @JoinColumn(name = "man_ativo_id")
-    private Ativo man_ativo_id;
-
-    @ManyToOne
-    @JoinColumn(name = "man_endereco_id")
-    private Endereco man_endereco_id;
 
     @Enumerated(EnumType.STRING)
     private ManutencaoStatus man_status;
 
-    @Column(nullable = false)
+    @Column
     private String man_responsavel;
 
-    public Long getMan_id() {
-        return man_id;
+    public HistoricoManutencao() {
     }
 
-    public void setMan_id(Long man_id) {
-        this.man_id = man_id;
+    public HistoricoManutencao(Ativo his_ativo_id, Long his_manutencao_id, String man_atividade, Date man_data, Time man_horario, ManutencaoStatus man_status, String man_responsavel) {
+        this.his_ativo_id = his_ativo_id;
+        this.his_manutencao_id = his_manutencao_id;
+        this.man_atividade = man_atividade;
+        this.man_data = man_data;
+        this.man_horario = man_horario;
+        this.man_status = man_status;
+        this.man_responsavel = man_responsavel;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Ativo getHis_ativo_id() {
+        return his_ativo_id;
+    }
+
+    public void setHis_ativo_id(Ativo his_ativo_id) {
+        this.his_ativo_id = his_ativo_id;
+    }
+
+    public Long getHis_manutencao_id() {
+        return his_manutencao_id;
+    }
+
+    public void setHis_manutencao_id(Long his_manutencao_id) {
+        this.his_manutencao_id = his_manutencao_id;
+    }
+
+    public Date getHis_data() {
+        return his_data;
+    }
+
+    public void setHis_data(Date his_data) {
+        this.his_data = his_data;
     }
 
     public String getMan_atividade() {
@@ -80,22 +113,6 @@ public class Manutencao {
 
     public void setMan_horario(Time man_horario) {
         this.man_horario = man_horario;
-    }
-
-    public Ativo getMan_ativo_id() {
-        return man_ativo_id;
-    }
-
-    public void setMan_ativo_id(Ativo man_ativo_id) {
-        this.man_ativo_id = man_ativo_id;
-    }
-
-    public Endereco getMan_endereco_id() {
-        return man_endereco_id;
-    }
-
-    public void setMan_endereco_id(Endereco man_endereco_id) {
-        this.man_endereco_id = man_endereco_id;
     }
 
     public ManutencaoStatus getMan_status() {

@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+//import jakarta.persistence.JoinColumn;
+//import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Administrador {
@@ -16,20 +18,38 @@ public class Administrador {
 	private String adm_nome;
 	
 	@Column
-	private String adm_email;
+	private String email;
 	
 	@Column
 	private String adm_senha;
-	
+
 	@Column
-	private char adm_telefone;
+	private String adm_telefone;
+	
+	@Column(nullable = false, unique = true)
+	private String adm_cpf;
+
+//	@ManyToOne
+//	@JoinColumn(name = "adm_empresa_id")
+//	private Empresa adm_empresa_id;
+
+	public Administrador() {
+	}
+
+	public Administrador(String adm_nome, String email, String adm_senha, String adm_telefone, String adm_cpf) {
+		this.adm_nome = adm_nome;
+		this.email = email;
+		this.adm_senha = adm_senha;
+		this.adm_telefone = adm_telefone;
+		this.adm_cpf = adm_cpf;
+	}
 
 	public Long getAdm_id() {
 		return adm_id;
 	}
 
-	public void setAdm_id(Long adm_id) {
-		this.adm_id = adm_id;
+	public void setAdm_id(Long id) {
+		this.adm_id = id;
 	}
 
 	public String getAdm_nome() {
@@ -41,11 +61,11 @@ public class Administrador {
 	}
 
 	public String getAdm_email() {
-		return adm_email;
+		return email;
 	}
 
-	public void setAdm_email(String adm_email) {
-		this.adm_email = adm_email;
+	public void setAdm_email(String email) {
+		this.email = email;
 	}
 
 	public String getAdm_senha() {
@@ -56,13 +76,20 @@ public class Administrador {
 		this.adm_senha = adm_senha;
 	}
 
-	public char getAdm_telefone() {
+	public String getAdm_telefone() {
 		return adm_telefone;
 	}
 
-	public void setAdm_telefone(char adm_telefone) {
+	public void setAdm_telefone(String adm_telefone) {
 		this.adm_telefone = adm_telefone;
 	}
-	
+
+	public String getAdm_cpf() {
+		return adm_cpf;
+	}
+
+	public void setAdm_cpf(String adm_cpf) {
+		this.adm_cpf = adm_cpf;
+	}
 	
 }

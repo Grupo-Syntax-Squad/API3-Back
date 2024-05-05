@@ -8,37 +8,39 @@ import jakarta.persistence.Id;
 
 @Entity
 public class Imagem {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long ima_id;
-	
-	@Column
-	private String ima_nome;
-	
-	@Column(nullable = false)
-	private String ima_caminho;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long img_id;
 
-	public Long getIma_id() {
-		return ima_id;
-	}
+    @Column(nullable = false)
+    private String img_nome;
 
-	public void setIma_id(Long ima_id) {
-		this.ima_id = ima_id;
-	}
+    @Column(nullable = false)
+    private String img_caminho;
 
-	public String getIma_nome() {
-		return ima_nome;
-	}
+    public Long getImg_id() {
+        return img_id;
+    }
 
-	public void setIma_nome(String ima_nome) {
-		this.ima_nome = ima_nome;
-	}
+    public void setImg_id(Long img_id) {
+        this.img_id = img_id;
+    }
 
-	public String getIma_caminho() {
-		return ima_caminho;
-	}
+    public String getImg_nome() {
+        return img_nome;
+    }
 
-	public void setIma_caminho(String ima_caminho) {
-		this.ima_caminho = ima_caminho;
-	}
+    public void setImg_nome(String img_nome) {
+        this.img_nome = img_nome;
+    }
+
+    public String getImg_caminho() {
+        return img_caminho;
+    }
+
+    public void setImg_caminho(String img_caminho) {
+        this.img_caminho = img_caminho;
+    }
+
+    
 }
