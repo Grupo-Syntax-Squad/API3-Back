@@ -26,9 +26,6 @@ public class Destinatario {
     @Column(nullable = false)
     private String des_telefone;
 
-    @Column
-    private String des_senha;
-
     @ManyToOne
     @JoinColumn(name = "des_endereco_id")
     private Endereco des_endereco_id;
@@ -64,15 +61,7 @@ public class Destinatario {
     public void setDes_telefone(String des_telefone) {
         this.des_telefone = des_telefone;
     }
-
-    public String getDes_senha() {
-        return des_senha;
-    }
-
-    public void setDes_senha(String des_senha) {
-        this.des_senha = des_senha;
-    }
-
+    
     public Endereco getDes_endereco_id() {
         return des_endereco_id;
     }
