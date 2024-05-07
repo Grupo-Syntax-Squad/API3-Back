@@ -26,7 +26,7 @@ public class ControleAutenticacao {
     private JwtUtil jwtUtil;
 
     @PostMapping("login")
-    public ResponseEntity postLogin(@RequestBody LoginDTO data) {
+    public ResponseEntity<String> postLogin(@RequestBody LoginDTO data) {
         Administrador administrador = repositorioAdministrador.findByEmail(data.email());
 
         if (administrador == null || !administrador.getAdm_senha().equals(data.senha())) {
@@ -39,7 +39,7 @@ public class ControleAutenticacao {
     }
 
     @PostMapping("registrar")
-    public ResponseEntity postRegistrar(@RequestBody RegistrarDTO data) {
+    public ResponseEntity<?> postRegistrar(@RequestBody RegistrarDTO data) {
         if (repositorioAdministrador.findByEmail(data.adm_email()) != null) {
             return ResponseEntity.badRequest().build();
         }
@@ -52,7 +52,7 @@ public class ControleAutenticacao {
     }
 
     @PostMapping("verificarToken")
-    public ResponseEntity postVerificarToken(@RequestBody String token) {
+    public ResponseEntity<?> postVerificarToken(@RequestBody String token) {
         try {
             boolean verificacao = jwtUtil.validateToken(token);
             return ResponseEntity.ok(verificacao);
