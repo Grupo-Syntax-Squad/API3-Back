@@ -312,6 +312,4 @@ public class Ativo {
     public void setAti_condicoes_uso(String ati_condicoes_uso) {
         this.ati_condicoes_uso = ati_condicoes_uso;
     }
-
-    
 }
