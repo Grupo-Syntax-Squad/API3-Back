@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.assetbox.api.enums.ManutencaoStatus;
 import com.assetbox.api.modelos.HistoricoManutencao;
 import com.assetbox.api.modelos.Manutencao;
+import com.assetbox.api.processos.StringVerificadorNulo;
 import com.assetbox.api.repositorios.RepositorioHistoricoManutencao;
 import com.assetbox.api.repositorios.RepositorioManutencao;
 
@@ -31,17 +32,19 @@ public class ControleManutencao {
     @Autowired
     private RepositorioHistoricoManutencao repositorioHistoricoManutencao;
 
+    private StringVerificadorNulo stringVerificadorNulo = new StringVerificadorNulo();
+
     @GetMapping("")
-    public ResponseEntity<List<Manutencao>> getManutencoes() {
+    public ResponseEntity<?> getManutencoes() {
         try {
             return new ResponseEntity<List<Manutencao>>(repositorioManutencao.findAll(), HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<List<Manutencao>>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @PostMapping("")
-    public ResponseEntity<Manutencao> postManutencao(@RequestBody Manutencao manutencao) {
+    public ResponseEntity<?> postManutencao(@RequestBody Manutencao manutencao) {
         try {
             Manutencao manutencaoEntidade = repositorioManutencao.save(manutencao);
 
@@ -54,21 +57,21 @@ public class ControleManutencao {
 
             return new ResponseEntity<Manutencao>(manutencaoEntidade, HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Manutencao> getManutencao(@PathVariable Long id) {
+    public ResponseEntity<?> getManutencao(@PathVariable Long id) {
         try {
             return new ResponseEntity<Manutencao>(repositorioManutencao.findById(id).get(), HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<Manutencao> deleteAtivo(@PathVariable Long id) {
+    public ResponseEntity<?> deleteAtivo(@PathVariable Long id) {
         try {
             Manutencao manutencao = repositorioManutencao.findById(id).get();
             manutencao.setMan_status(ManutencaoStatus.CANCELADA);
@@ -80,23 +83,32 @@ public class ControleManutencao {
             repositorioHistoricoManutencao.save(historicoManutencao);
             return new ResponseEntity<Manutencao>(repositorioManutencao.save(manutencao), HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<Manutencao> putMethodName(@PathVariable Long id, @RequestBody Manutencao atualizacao) {
+    public ResponseEntity<?> putMethodName(@PathVariable Long id, @RequestBody Manutencao atualizacao) {
         try {
             Manutencao manutencao = repositorioManutencao.findById(id).get();
-            manutencao.setMan_status(atualizacao.getMan_status());
+
+            // Atualizando campos
+            if (!stringVerificadorNulo.verificarNulo(atualizacao.getMan_atividade())) manutencao.setMan_atividade(atualizacao.getMan_atividade());
+            if (!(atualizacao.getMan_data() == null)) manutencao.setMan_data(atualizacao.getMan_data());
+            if (!(atualizacao.getMan_horario() == null)) manutencao.setMan_horario(atualizacao.getMan_horario());
+            if (!stringVerificadorNulo.verificarNulo(atualizacao.getMan_responsavel())) manutencao.setMan_responsavel(atualizacao.getMan_responsavel());
+            if (!(atualizacao.getMan_status() == null)) manutencao.setMan_status(atualizacao.getMan_status());
             repositorioManutencao.save(manutencao);
+
+            // Colocando atualização no histórico
             HistoricoManutencao historicoManutencao = new HistoricoManutencao(manutencao.getMan_ativo_id(),
                     manutencao.getMan_id(), manutencao.getMan_atividade(), manutencao.getMan_data(),
                     manutencao.getMan_horario(), manutencao.getMan_status(), manutencao.getMan_responsavel());
             repositorioHistoricoManutencao.save(historicoManutencao);
+            
             return new ResponseEntity<Manutencao>(manutencao, HttpStatus.OK);
         } catch(Exception e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }
