@@ -26,38 +26,39 @@ public class ControleAutenticacao {
     private JwtUtil jwtUtil;
 
     @PostMapping("login")
-    public ResponseEntity<String> postLogin(@RequestBody LoginDTO data) {
-        Administrador administrador = repositorioAdministrador.findByEmail(data.email());
+    public ResponseEntity<?> postLogin(@RequestBody LoginDTO data) {
+        try {
+            Administrador administrador = repositorioAdministrador.findByEmail(data.email());
 
-        if (administrador == null || !administrador.getAdm_senha().equals(data.senha())) {
-            return ResponseEntity.badRequest().build();
+            if (administrador == null || !administrador.getAdm_senha().equals(data.senha())) {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+
+            String jwt = jwtUtil.generateToken(data.email());
+
+            return new ResponseEntity<>(jwt, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-
-        String jwt = jwtUtil.generateToken(data.email());
-
-        return ResponseEntity.ok(jwt);
     }
 
     @PostMapping("registrar")
     public ResponseEntity<?> postRegistrar(@RequestBody RegistrarDTO data) {
         if (repositorioAdministrador.findByEmail(data.adm_email()) != null) {
-            return ResponseEntity.badRequest().build();
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-
         Administrador administrador = new Administrador(data.adm_nome(), data.adm_email(), data.adm_senha(), data.adm_telefone(), data.adm_cpf());
-
         repositorioAdministrador.save(administrador);
-
-        return ResponseEntity.ok().build();
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PostMapping("verificarToken")
     public ResponseEntity<?> postVerificarToken(@RequestBody String token) {
         try {
             boolean verificacao = jwtUtil.validateToken(token);
-            return ResponseEntity.ok(verificacao);
+            return new ResponseEntity<>(verificacao, HttpStatus.OK);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Token inválido");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
 }

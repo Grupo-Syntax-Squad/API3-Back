@@ -26,13 +26,22 @@ public class ControleAdministrador {
 	private AdministradorAtualizador administradorAtualizador = new AdministradorAtualizador();
 
 	@GetMapping("")
-	public ResponseEntity<List<Administrador>> getAdministradores() {
-		return ResponseEntity.ok().body(repositorioAdministrador.findAll());
+	public ResponseEntity<?> getAdministradores() {
+		try {
+			return new ResponseEntity<List<Administrador>>(repositorioAdministrador.findAll(), HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 
 	@GetMapping("{id}")
-	public ResponseEntity<Administrador> getAdministrador(@PathVariable Long id) {
-		return ResponseEntity.ok().body(repositorioAdministrador.findById(id).get());
+	public ResponseEntity<?> getAdministrador(@PathVariable Long id) {
+		try {
+			if (repositorioAdministrador.findById(id).isPresent()) return new ResponseEntity<Administrador>(repositorioAdministrador.findById(id).get(), HttpStatus.OK);
+			else return new ResponseEntity<Administrador>(HttpStatus.BAD_REQUEST);
+		} catch (Exception e) {
+			return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 
 	@PutMapping("{id}")
@@ -40,12 +49,13 @@ public class ControleAdministrador {
 		try {
 			if (repositorioAdministrador.findById(id).isPresent()) {
 				Administrador administradorEntidade = repositorioAdministrador.findById(id).get();
-				
+
 				administradorEntidade = administradorAtualizador.atualizar(administradorEntidade, administrador);
 				repositorioAdministrador.save(administradorEntidade);
 
 				return new ResponseEntity<Administrador>(repositorioAdministrador.findById(id).get(), HttpStatus.OK);
-			} else return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			} else
+				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		} catch (Exception e) {
 			return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
@@ -53,7 +63,11 @@ public class ControleAdministrador {
 
 	@DeleteMapping("{id}")
 	public ResponseEntity<?> deleteAdministrador(@PathVariable Long id) {
-		repositorioAdministrador.deleteById(id);
-		return ResponseEntity.ok().build();
+		try {
+			repositorioAdministrador.deleteById(id);
+			return new ResponseEntity<>(HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 }
