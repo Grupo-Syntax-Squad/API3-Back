@@ -25,7 +25,7 @@ public class ControleAdministrador {
 
 	private AdministradorAtualizador administradorAtualizador = new AdministradorAtualizador();
 
-	@GetMapping("")
+	@GetMapping
 	public ResponseEntity<List<Administrador>> getAdministradores() {
 		return ResponseEntity.ok().body(repositorioAdministrador.findAll());
 	}
