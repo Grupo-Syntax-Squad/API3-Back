@@ -51,6 +51,10 @@ public class ControleAdministrador {
 			if (repositorioAdministrador.findById(id).isPresent()) {
 				Administrador administradorEntidade = repositorioAdministrador.findById(id).get();
 
+				if (repositorioAdministrador.findByCpf(administrador.getAdm_cpf()) != null) return new ResponseEntity<>("CPF já registrado no sistema!", HttpStatus.BAD_REQUEST);
+				if (repositorioAdministrador.findByEmail(administrador.getAdm_email()) != null) return new ResponseEntity<>("Email já registrado no sistema!", HttpStatus.BAD_REQUEST);
+				if (repositorioAdministrador.findByTelefone(administrador.getAdm_telefone()) != null) return new ResponseEntity<>("Telefone já registrado no sistema!", HttpStatus.BAD_REQUEST);
+
 				administradorEntidade = administradorAtualizador.atualizar(administradorEntidade, administrador);
 				repositorioAdministrador.save(administradorEntidade);
 
