@@ -9,6 +9,8 @@ import com.assetbox.api.modelos.Administrador;
 import com.assetbox.api.processos.JwtUtil;
 import com.assetbox.api.repositorios.RepositorioAdministrador;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,8 +37,10 @@ public class ControleAutenticacao {
             }
 
             String jwt = jwtUtil.generateToken(data.email());
-
-            return new ResponseEntity<>(jwt, HttpStatus.OK);
+            ArrayList response = new ArrayList<>();
+            response.add(jwt);
+            response.add(administrador.getAdm_id());
+            return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
