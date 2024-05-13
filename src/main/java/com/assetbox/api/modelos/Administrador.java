@@ -1,5 +1,8 @@
 package com.assetbox.api.modelos;
 
+
+import com.assetbox.api.enums.AdminStatus;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -29,6 +32,9 @@ public class Administrador {
 	@Column(nullable = false, unique = true)
 	private String cpf;
 
+	@Column(nullable = false)
+	private AdminStatus status;
+
 //	@ManyToOne
 //	@JoinColumn(name = "adm_empresa_id")
 //	private Empresa adm_empresa_id;
@@ -36,12 +42,13 @@ public class Administrador {
 	public Administrador() {
 	}
 
-	public Administrador(String adm_nome, String email, String adm_senha, String adm_telefone, String adm_cpf) {
+	public Administrador(String adm_nome, String email, String adm_senha, String adm_telefone, String adm_cpf, AdminStatus status) {
 		this.adm_nome = adm_nome;
 		this.email = email;
 		this.adm_senha = adm_senha;
 		this.telefone = adm_telefone;
 		this.cpf = adm_cpf;
+		this.status = status;
 	}
 
 	public Long getAdm_id() {
@@ -91,5 +98,12 @@ public class Administrador {
 	public void setAdm_cpf(String adm_cpf) {
 		this.cpf = adm_cpf;
 	}
-	
+
+	public AdminStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(AdminStatus status) {
+		this.status = status;
+	}
 }
