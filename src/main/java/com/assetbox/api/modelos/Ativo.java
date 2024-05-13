@@ -312,4 +312,12 @@ public class Ativo {
     public void setAti_condicoes_uso(String ati_condicoes_uso) {
         this.ati_condicoes_uso = ati_condicoes_uso;
     }
+
+    public Documento getAti_documento_id() {
+        return ati_documento_id;
+    }
+
+    public void setAti_documento_id(Documento ati_documento_id) {
+        this.ati_documento_id = ati_documento_id;
+    }
 }

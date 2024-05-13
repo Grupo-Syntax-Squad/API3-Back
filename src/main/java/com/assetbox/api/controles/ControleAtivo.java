@@ -24,6 +24,7 @@ public class ControleAtivo {
     @Autowired
     private RepositorioAtivo repositorioAtivo;
 
+    @Autowired
     private AtivoAtualizador ativoAtualizador;
 
     @GetMapping
