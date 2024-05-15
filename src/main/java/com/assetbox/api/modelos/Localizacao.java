@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Localizacao {
@@ -14,6 +16,10 @@ public class Localizacao {
 
     @Column
     private String loc_titulo;
+
+    @ManyToOne
+    @JoinColumn(name = "loc_filial_id")
+    private Filial loc_filial;
 
     public Long getLoc_id() {
         return loc_id;
@@ -30,4 +36,14 @@ public class Localizacao {
     public void setLoc_titulo(String loc_titulo) {
         this.loc_titulo = loc_titulo;
     }
+
+    public Filial getLoc_filial() {
+        return loc_filial;
+    }
+
+    public void setLoc_filial(Filial loc_filial) {
+        this.loc_filial = loc_filial;
+    }
+
+    
 }

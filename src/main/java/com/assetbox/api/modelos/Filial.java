@@ -1,11 +1,15 @@
 package com.assetbox.api.modelos;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 
 @Entity
@@ -26,6 +30,9 @@ public class Filial {
     @OneToOne
     @JoinColumn(name = "fil_endereco", nullable = false)
     private Endereco fil_endereco;
+
+    @OneToMany(mappedBy = "filial")
+    private List<Localizacao> localizacoes = new ArrayList<>();
 
     public Long getFil_id() {
         return fil_id;
@@ -65,5 +72,13 @@ public class Filial {
 
     public void setFil_endereco(Endereco fil_endereco) {
         this.fil_endereco = fil_endereco;
+    }
+
+    public List<Localizacao> getLocalizacoes() {
+        return localizacoes;
+    }
+
+    public void setLocalizacoes(List<Localizacao> localizacoes) {
+        this.localizacoes = localizacoes;
     }
 }
