@@ -27,6 +27,12 @@ public class Matriz {
     @Column(nullable = false)
     private String mat_nome_fantasia;
 
+    @Column(nullable = false)
+    private String mat_telefone;
+
+    @Column(nullable = false)
+    private String mat_email;
+
     public Long getMat_id() {
         return mat_id;
     }
@@ -65,5 +71,21 @@ public class Matriz {
 
     public void setMat_nome_fantasia(String mat_nome_fantasia) {
         this.mat_nome_fantasia = mat_nome_fantasia;
+    }
+
+    public String getMat_telefone() {
+        return mat_telefone;
+    }
+
+    public void setMat_telefone(String mat_telefone) {
+        this.mat_telefone = mat_telefone;
+    }
+
+    public String getMat_email() {
+        return mat_email;
+    }
+
+    public void setMat_email(String mat_email) {
+        this.mat_email = mat_email;
     }
 }

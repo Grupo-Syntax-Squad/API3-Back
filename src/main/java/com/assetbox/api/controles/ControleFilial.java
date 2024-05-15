@@ -2,7 +2,6 @@ package com.assetbox.api.controles;
 
 import java.util.List;
 
-import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.assetbox.api.modelos.Filial;
+import com.assetbox.api.processos.FilialAtualizador;
 import com.assetbox.api.repositorios.RepositorioFilial;
 
 @RestController
@@ -23,6 +23,8 @@ import com.assetbox.api.repositorios.RepositorioFilial;
 public class ControleFilial {
     @Autowired
     private RepositorioFilial repositorioFilial;
+
+    private FilialAtualizador filialAtualizador = new FilialAtualizador();
 
     @GetMapping
     public ResponseEntity<?> getFiliais() {
@@ -59,7 +61,7 @@ public class ControleFilial {
             if (repositorioFilial.findById(id).isPresent()) {
                 Filial filialEntidade = repositorioFilial.findById(id).get();
 
-                // Adicionar o atualizador!!!!
+                filialEntidade = filialAtualizador.atualizar(filialEntidade, filial);
                 
                 filialEntidade = repositorioFilial.save(filialEntidade);
                 return new ResponseEntity<>(filialEntidade, HttpStatus.OK);
