@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.assetbox.api.dtos.LoginDTO;
 import com.assetbox.api.dtos.RegistrarDTO;
+import com.assetbox.api.enums.AdminStatus;
 import com.assetbox.api.modelos.Administrador;
 import com.assetbox.api.processos.JwtUtil;
 import com.assetbox.api.repositorios.RepositorioAdministrador;
@@ -51,7 +52,7 @@ public class ControleAutenticacao {
         if (repositorioAdministrador.findByEmail(data.adm_email()) != null) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        Administrador administrador = new Administrador(data.adm_nome(), data.adm_email(), data.adm_senha(), data.adm_telefone(), data.adm_cpf());
+        Administrador administrador = new Administrador(data.adm_nome(), data.adm_email(), data.adm_senha(), data.adm_telefone(), data.adm_cpf(), AdminStatus.ATIVO);
         repositorioAdministrador.save(administrador);
         return new ResponseEntity<>(HttpStatus.OK);
     }

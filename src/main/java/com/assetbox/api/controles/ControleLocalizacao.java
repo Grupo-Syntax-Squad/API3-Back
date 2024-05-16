@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.assetbox.api.modelos.Localizacao;
 import com.assetbox.api.repositorios.RepositorioLocalizacao;
 
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

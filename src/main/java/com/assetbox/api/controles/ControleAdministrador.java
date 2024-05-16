@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.assetbox.api.enums.AdminStatus;
 import com.assetbox.api.modelos.Administrador;
 import com.assetbox.api.processos.AdministradorAtualizador;
 import com.assetbox.api.repositorios.RepositorioAdministrador;
@@ -71,8 +72,12 @@ public class ControleAdministrador {
 	@DeleteMapping("{id}")
 	public ResponseEntity<?> deleteAdministrador(@PathVariable Long id) {
 		try {
-			repositorioAdministrador.deleteById(id);
-			return new ResponseEntity<>(HttpStatus.OK);
+			if (repositorioAdministrador.findById(id).isPresent()) {
+				Administrador administrador = repositorioAdministrador.findById(id).get();
+				administrador.setStatus(AdminStatus.INATIVO);
+				repositorioAdministrador.save(administrador);
+				return new ResponseEntity<>(HttpStatus.OK);
+			} else return new ResponseEntity<>("Administrador não encontrado!", HttpStatus.BAD_REQUEST);
 		} catch (Exception e) {
 			return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
