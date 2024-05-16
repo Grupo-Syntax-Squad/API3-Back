@@ -14,11 +14,11 @@ public class Localizacao {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long loc_id;
 
-    @Column
+    @Column(nullable = false)
     private String loc_titulo;
 
     @ManyToOne
-    @JoinColumn(name = "loc_filial_id")
+    @JoinColumn(name = "loc_filial_id", nullable = false)
     private Filial loc_filial;
 
     public Long getLoc_id() {

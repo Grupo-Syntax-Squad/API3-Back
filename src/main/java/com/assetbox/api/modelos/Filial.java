@@ -31,7 +31,7 @@ public class Filial {
     @JoinColumn(name = "fil_endereco", nullable = false)
     private Endereco fil_endereco;
 
-    @OneToMany(mappedBy = "filial")
+    @OneToMany(mappedBy = "loc_filial")
     private List<Localizacao> localizacoes = new ArrayList<>();
 
     public Long getFil_id() {
