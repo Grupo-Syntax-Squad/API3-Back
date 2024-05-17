@@ -24,6 +24,7 @@ public class ControleMatriz {
     @GetMapping
     public ResponseEntity<?> getMatriz() {
         try {
+            if (repositorioMatriz.findById(1L).isEmpty()) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
             return new ResponseEntity<Matriz>(repositorioMatriz.findById(1L).get(), HttpStatus.OK);
         } catch(Exception e) {
             return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
