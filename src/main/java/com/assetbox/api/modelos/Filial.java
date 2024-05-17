@@ -27,6 +27,9 @@ public class Filial {
     @Column(nullable = false, unique = true)
     private String fil_email;
 
+    @Column(nullable = false, unique = true)
+    private String fil_cnpj;
+
     @OneToOne
     @JoinColumn(name = "fil_endereco", nullable = false)
     private Endereco fil_endereco;
@@ -66,6 +69,14 @@ public class Filial {
         this.fil_email = fil_email;
     }
 
+    public String getFil_cnpj() {
+        return fil_cnpj;
+    }
+
+    public void setFil_cnpj(String fil_cnpj) {
+        this.fil_cnpj = fil_cnpj;
+    }
+
     public Endereco getFil_endereco() {
         return fil_endereco;
     }
@@ -81,4 +92,6 @@ public class Filial {
     public void setLocalizacoes(List<Localizacao> localizacoes) {
         this.localizacoes = localizacoes;
     }
+
+    
 }

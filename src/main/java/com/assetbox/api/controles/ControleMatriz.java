@@ -7,11 +7,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.assetbox.api.modelos.Matriz;
 import com.assetbox.api.processos.MatrizAtualizador;
 import com.assetbox.api.repositorios.RepositorioMatriz;
 
+@RestController
 @RequestMapping("matriz")
 public class ControleMatriz {
     @Autowired
