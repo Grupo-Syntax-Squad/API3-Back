@@ -33,8 +33,13 @@ public class ControleDestinatario {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Destinatario> getDestinatario(@PathVariable Long id) {
-        return ResponseEntity.ok().body(repositorioDestinatario.findById(id).get());
+    public ResponseEntity<?> getDestinatario(@PathVariable Long id) {
+        try {
+            return ResponseEntity.ok().body(repositorioDestinatario.findById(id).get());
+        } catch(Exception e) {
+            return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        
     }
 
     @PostMapping
