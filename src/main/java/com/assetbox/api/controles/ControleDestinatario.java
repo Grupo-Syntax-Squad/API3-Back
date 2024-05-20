@@ -53,11 +53,11 @@ public class ControleDestinatario {
 			if (repositorioDestinatario.findById(id).isPresent()) {
 				Destinatario destinatarioEntidade = repositorioDestinatario.findById(id).get();
 
-				if (repositorioDestinatario.findByCpf(destinatario.getDes_cpf()) != null && repositorioDestinatario.findByCpf(destinatario.getDes_cpf()).getDes_id() != destinatarioEntidade.getDes_id()) return new ResponseEntity<>("CPF já registrado no sistema!", HttpStatus.BAD_REQUEST);
+				if (repositorioDestinatario.findByCpf(destinatario.getCpf()) != null && repositorioDestinatario.findByCpf(destinatario.getCpf()).getDes_id() != destinatarioEntidade.getDes_id()) return new ResponseEntity<>("CPF já registrado no sistema!", HttpStatus.BAD_REQUEST);
 
-				if (repositorioDestinatario.findByEmail(destinatario.getDes_email()) != null && repositorioDestinatario.findByEmail(destinatario.getDes_email()).getDes_id() != destinatarioEntidade.getDes_id()) return new ResponseEntity<>("Email já registrado no sistema!", HttpStatus.BAD_REQUEST);
+				if (repositorioDestinatario.findByEmail(destinatario.getEmail()) != null && repositorioDestinatario.findByEmail(destinatario.getEmail()).getDes_id() != destinatarioEntidade.getDes_id()) return new ResponseEntity<>("Email já registrado no sistema!", HttpStatus.BAD_REQUEST);
 
-				if (repositorioDestinatario.findByTelefone(destinatario.getDes_telefone()) != null && repositorioDestinatario.findByTelefone(destinatario.getDes_telefone()).getDes_id() != destinatarioEntidade.getDes_id()) return new ResponseEntity<>("Telefone já registrado no sistema!", HttpStatus.BAD_REQUEST);
+				if (repositorioDestinatario.findByTelefone(destinatario.getTelefone()) != null && repositorioDestinatario.findByTelefone(destinatario.getTelefone()).getDes_id() != destinatarioEntidade.getDes_id()) return new ResponseEntity<>("Telefone já registrado no sistema!", HttpStatus.BAD_REQUEST);
 
 				destinatarioEntidade = destinatarioAtualizador.atualizar(destinatarioEntidade, destinatario);
 				repositorioDestinatario.save(destinatarioEntidade);

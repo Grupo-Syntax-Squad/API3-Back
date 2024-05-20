@@ -18,14 +18,14 @@ public class DestinatarioAtualizador {
 
         ResponseEntity<?> responseEndereco = controleEndereco.getEndereco(atualizacao.getDes_endereco_id().getEnd_id());
 
-        if (!stringVerificadorNulo.verificarNulo(atualizacao.getDes_cpf()))
-            destinatarioEntidade.setDes_cpf(atualizacao.getDes_cpf());
-        if (!stringVerificadorNulo.verificarNulo(atualizacao.getDes_email()))
-            destinatarioEntidade.setDes_email(atualizacao.getDes_email());
+        if (!stringVerificadorNulo.verificarNulo(atualizacao.getCpf()))
+            destinatarioEntidade.setCpf(atualizacao.getCpf());
+        if (!stringVerificadorNulo.verificarNulo(atualizacao.getEmail()))
+            destinatarioEntidade.setEmail(atualizacao.getEmail());
         if (!stringVerificadorNulo.verificarNulo(atualizacao.getDes_nome()))
             destinatarioEntidade.setDes_nome(atualizacao.getDes_nome());
-        if (!stringVerificadorNulo.verificarNulo(atualizacao.getDes_telefone()))
-            destinatarioEntidade.setDes_telefone(atualizacao.getDes_telefone());
+        if (!stringVerificadorNulo.verificarNulo(atualizacao.getTelefone()))
+            destinatarioEntidade.setTelefone(atualizacao.getTelefone());
         if (responseEndereco.getStatusCode().value() == 200)
             destinatarioEntidade.setDes_endereco_id(atualizacao.getDes_endereco_id());
         return destinatarioEntidade;
