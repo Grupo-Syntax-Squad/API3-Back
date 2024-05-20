@@ -28,8 +28,13 @@ public class ControleDestinatario {
     private DestinatarioAtualizador destinatarioAtualizador;
 
     @GetMapping
-    public ResponseEntity<List<Destinatario>> getDestinatarios() {
-        return ResponseEntity.ok().body(repositorioDestinatario.findAll());
+    public ResponseEntity<?> getDestinatarios() {
+        try {
+            if (repositorioDestinatario.findAll().isEmpty()) return new ResponseEntity<>("Nenhum destinatário cadastrado", HttpStatus.BAD_REQUEST);
+            else return new ResponseEntity<List<Destinatario>>(repositorioDestinatario.findAll(), HttpStatus.OK);
+        } catch(Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @GetMapping("{id}")
@@ -43,8 +48,12 @@ public class ControleDestinatario {
     }
 
     @PostMapping
-    public ResponseEntity<Destinatario> postDestinatario(@RequestBody Destinatario destinatario) {
-        return ResponseEntity.ok().body(repositorioDestinatario.save(destinatario));
+    public ResponseEntity<?> postDestinatario(@RequestBody Destinatario destinatario) {
+        try {
+            return new ResponseEntity<Destinatario>(repositorioDestinatario.save(destinatario), HttpStatus.OK);
+        } catch(Exception e) {
+            return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @PutMapping("{id}")
@@ -63,7 +72,6 @@ public class ControleDestinatario {
 				repositorioDestinatario.save(destinatarioEntidade);
 
 				return new ResponseEntity<Destinatario>(repositorioDestinatario.findById(id).get(), HttpStatus.OK);
-
 			} else
 				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		} catch (Exception e) {
@@ -73,7 +81,11 @@ public class ControleDestinatario {
 
     @DeleteMapping("{id}")
     public ResponseEntity<?> deleteDestinatario(@PathVariable Long id) {
-        repositorioDestinatario.deleteById(id);
-        return ResponseEntity.ok().build();
+        try {
+            repositorioDestinatario.deleteById(id);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch(Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }
