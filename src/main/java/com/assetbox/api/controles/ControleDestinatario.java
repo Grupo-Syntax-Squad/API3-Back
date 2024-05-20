@@ -49,19 +49,27 @@ public class ControleDestinatario {
 
     @PutMapping("{id}")
     public ResponseEntity<?> putDestinatario(@PathVariable Long id, @RequestBody Destinatario destinatario) {
-        try {
-            if (repositorioDestinatario.findById(id).isPresent()) {
-                Destinatario destinatarioEntidade = repositorioDestinatario.findById(id).get();
+		try {
+			if (repositorioDestinatario.findById(id).isPresent()) {
+				Destinatario destinatarioEntidade = repositorioDestinatario.findById(id).get();
 
-                destinatarioEntidade = destinatarioAtualizador.atualizar(destinatarioEntidade, destinatario);
-                repositorioDestinatario.save(destinatarioEntidade);
+				if (repositorioDestinatario.findByCpf(destinatario.getDes_cpf()) != null && repositorioDestinatario.findByCpf(destinatario.getDes_cpf()).getDes_id() != destinatarioEntidade.getDes_id()) return new ResponseEntity<>("CPF já registrado no sistema!", HttpStatus.BAD_REQUEST);
 
-                return new ResponseEntity<Destinatario>(repositorioDestinatario.findById(id).get(), HttpStatus.OK);
-            } else return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        } catch (Exception e) {
-            return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
+				if (repositorioDestinatario.findByEmail(destinatario.getDes_email()) != null && repositorioDestinatario.findByEmail(destinatario.getDes_email()).getDes_id() != destinatarioEntidade.getDes_id()) return new ResponseEntity<>("Email já registrado no sistema!", HttpStatus.BAD_REQUEST);
+
+				if (repositorioDestinatario.findByTelefone(destinatario.getDes_telefone()) != null && repositorioDestinatario.findByTelefone(destinatario.getDes_telefone()).getDes_id() != destinatarioEntidade.getDes_id()) return new ResponseEntity<>("Telefone já registrado no sistema!", HttpStatus.BAD_REQUEST);
+
+				destinatarioEntidade = destinatarioAtualizador.atualizar(destinatarioEntidade, destinatario);
+				repositorioDestinatario.save(destinatarioEntidade);
+
+				return new ResponseEntity<Destinatario>(repositorioDestinatario.findById(id).get(), HttpStatus.OK);
+
+			} else
+				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		} catch (Exception e) {
+			return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 
     @DeleteMapping("{id}")
     public ResponseEntity<?> deleteDestinatario(@PathVariable Long id) {
