@@ -35,12 +35,58 @@ public class AtivoAtualizador {
 
     public Ativo atualizar(Ativo ativoEntidade, Ativo atualizacao) {
 
-        // ResponseEntity<?> responseLocalizacao = controleLocalizacao.getLocalizacao(atualizacao.getAti_localizacao_id().getLoc_id());
-        // ResponseEntity<?> responseDestinatario = controleDestinatario.getDestinatario(atualizacao.getAti_destinatario_id().getDes_id());
-        // ResponseEntity<?> responseTipo = controleTipo.getTipo(atualizacao.getAti_tipo_id().getTip_id());
-        // ResponseEntity<?> responseImagem = controleImagem.getImagem(atualizacao.getAti_imagem_id().getImg_id());
-        // ResponseEntity<?> responseDocumento = controleDocumento.getDocumento(atualizacao.getAti_documento_id().getDocumentoId());
-        ResponseEntity<?> responseFilial = controleFilial.getFilial(atualizacao.getAti_filial_id().getFil_id());
+        if (atualizacao.getAti_localizacao_id().getLoc_id() != null) {
+            ResponseEntity<?> responseLocalizacao = controleLocalizacao.getLocalizacao(
+                atualizacao.getAti_localizacao_id().getLoc_id()
+                );
+            if (responseLocalizacao.getStatusCode().value() == 200) {
+                ativoEntidade.setAti_localizacao_id(atualizacao.getAti_localizacao_id());
+            }
+        }
+
+        if (atualizacao.getAti_destinatario_id().getDes_id() != null) {
+            ResponseEntity<?> responseDestinatario = controleDestinatario.getDestinatario(
+                atualizacao.getAti_destinatario_id().getDes_id()
+                );
+            if (responseDestinatario.getStatusCode().value() == 200){
+                ativoEntidade.setAti_destinatario_id(atualizacao.getAti_destinatario_id());
+            }
+        }
+
+        if (atualizacao.getAti_tipo_id().getTip_id() != null) {
+            ResponseEntity<?> responseTipo = controleTipo.getTipo(
+                atualizacao.getAti_tipo_id().getTip_id());
+            if (responseTipo.getStatusCode().value() == 200) {
+                ativoEntidade.setAti_tipo_id(atualizacao.getAti_tipo_id());
+            }
+        }
+
+        if (atualizacao.getAti_imagem_id().getImg_id() != null) {
+            ResponseEntity<?> responseImagem = controleImagem.getImagem(
+                atualizacao.getAti_imagem_id().getImg_id()
+                );
+            if (responseImagem.getStatusCode().value() == 200) {
+                ativoEntidade.setAti_imagem_id(atualizacao.getAti_imagem_id());
+            }
+        }
+
+        if (atualizacao.getAti_documento_id().getDocumentoId() != null) {
+            ResponseEntity<?> responseDocumento = controleDocumento.getDocumento(
+                atualizacao.getAti_documento_id().getDocumentoId()
+                );
+            if (responseDocumento.getStatusCode().value() == 200) {
+                ativoEntidade.setAti_documento_id(atualizacao.getAti_documento_id());
+            }
+        }
+
+        if (atualizacao.getAti_filial_id().getFil_id() != null) {
+            ResponseEntity<?> responseFilial = controleFilial.getFilial(
+                atualizacao.getAti_filial_id().getFil_id()
+                );
+            if (responseFilial.getStatusCode().value() == 200) {
+                ativoEntidade.setAti_filial_id(atualizacao.getAti_filial_id());
+            }
+        }
 
         if (!stringVerificadorNulo.verificarNulo(atualizacao.getAti_ano_fabricacao()))
             ativoEntidade.setAti_ano_fabricacao(atualizacao.getAti_ano_fabricacao());
@@ -72,18 +118,6 @@ public class AtivoAtualizador {
             ativoEntidade.setAti_data_expiracao(atualizacao.getAti_data_expiracao());
         if (atualizacao.getAti_preco_aquisicao() != ativoEntidade.getAti_preco_aquisicao())
             ativoEntidade.setAti_preco_aquisicao(atualizacao.getAti_preco_aquisicao());
-        // if (responseLocalizacao.getStatusCode().value() == 200)
-        //     ativoEntidade.setAti_localizacao_id(atualizacao.getAti_localizacao_id());
-        // if (responseDestinatario.getStatusCode().value() == 200)
-        //     ativoEntidade.setAti_destinatario_id(atualizacao.getAti_destinatario_id());
-        // if (responseTipo.getStatusCode().value() == 200)
-        //     ativoEntidade.setAti_tipo_id(atualizacao.getAti_tipo_id());
-        // if (responseImagem.getStatusCode().value() == 200)
-        //     ativoEntidade.setAti_imagem_id(atualizacao.getAti_imagem_id());
-        // if (responseDocumento.getStatusCode().value() == 200)
-        //     ativoEntidade.setAti_documento_id(atualizacao.getAti_documento_id());
-        if (responseFilial.getStatusCode().value() == 200)
-            ativoEntidade.setAti_filial_id(atualizacao.getAti_filial_id());
         return ativoEntidade;
     }
 }
