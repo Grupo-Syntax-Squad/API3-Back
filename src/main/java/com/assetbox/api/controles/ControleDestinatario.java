@@ -30,8 +30,7 @@ public class ControleDestinatario {
     @GetMapping
     public ResponseEntity<?> getDestinatarios() {
         try {
-            if (repositorioDestinatario.findAll().isEmpty()) return new ResponseEntity<>("Nenhum destinatário cadastrado", HttpStatus.BAD_REQUEST);
-            else return new ResponseEntity<List<Destinatario>>(repositorioDestinatario.findAll(), HttpStatus.OK);
+            return new ResponseEntity<List<Destinatario>>(repositorioDestinatario.findAll(), HttpStatus.OK);
         } catch(Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
