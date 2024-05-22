@@ -16,7 +16,15 @@ public class DestinatarioAtualizador {
 
     public Destinatario atualizar(Destinatario destinatarioEntidade, Destinatario atualizacao) {
 
-        ResponseEntity<?> responseEndereco = controleEndereco.getEndereco(atualizacao.getDes_endereco_id().getEnd_id());
+        if (atualizacao.getDes_endereco_id().getEnd_id() != null) {
+            ResponseEntity<?> responseEndereco = controleEndereco.getEndereco(
+                atualizacao.getDes_endereco_id().getEnd_id()
+                );
+            if (responseEndereco.getStatusCode().value() == 200) {
+                destinatarioEntidade.setDes_endereco_id(atualizacao.getDes_endereco_id());
+            }
+        }
+        
 
         if (!stringVerificadorNulo.verificarNulo(atualizacao.getCpf()))
             destinatarioEntidade.setCpf(atualizacao.getCpf());
@@ -26,8 +34,6 @@ public class DestinatarioAtualizador {
             destinatarioEntidade.setDes_nome(atualizacao.getDes_nome());
         if (!stringVerificadorNulo.verificarNulo(atualizacao.getTelefone()))
             destinatarioEntidade.setTelefone(atualizacao.getTelefone());
-        if (responseEndereco.getStatusCode().value() == 200)
-            destinatarioEntidade.setDes_endereco_id(atualizacao.getDes_endereco_id());
         return destinatarioEntidade;
     }
 }
