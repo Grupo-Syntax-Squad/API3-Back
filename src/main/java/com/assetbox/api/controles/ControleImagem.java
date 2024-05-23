@@ -1,6 +1,5 @@
 package com.assetbox.api.controles;
 
-import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -14,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,11 +22,12 @@ import com.assetbox.api.modelos.Imagem;
 import com.assetbox.api.repositorios.RepositorioImagem;
 
 @RestController
+@RequestMapping("imagens")
 public class ControleImagem {
     @Autowired
     private RepositorioImagem repositorioImagem;
 
-    @GetMapping("/imagens/{id}")
+    @GetMapping("{id}")
     public ResponseEntity<Resource> getImagem(@PathVariable Long id) {
         try {
             Imagem imagem = repositorioImagem.findById(id).get();
@@ -45,7 +46,7 @@ public class ControleImagem {
         }
     }
 
-    @PostMapping("/imagens")
+    @PostMapping
     public ResponseEntity<?> uploadImagem(@RequestParam("file") MultipartFile file) {
         Path path = Paths.get("src/main/resources/static/" + file.getOriginalFilename());
         
@@ -62,9 +63,9 @@ public class ControleImagem {
             repositorioImagem.save(imagem);
             
             return ResponseEntity.ok().body(imagem);
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }
