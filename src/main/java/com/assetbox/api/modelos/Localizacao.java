@@ -15,7 +15,7 @@ public class Localizacao {
     @Column(nullable = false)
     private String loc_titulo;
 
-    @Column(nullable = false)
+    @Column()
     private Long loc_filial_id;
 
     public Long getLoc_id() {
