@@ -1,7 +1,5 @@
 package com.assetbox.api.controles;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,18 +26,30 @@ public class ControleAtivo {
     private AtivoAtualizador ativoAtualizador;
 
     @GetMapping
-    public ResponseEntity<List<Ativo>> getAtivos() {
-        return ResponseEntity.ok().body(repositorioAtivo.findAll());
+    public ResponseEntity<?> getAtivos() {
+        try {
+            return ResponseEntity.ok().body(repositorioAtivo.findAll());
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Ativo> getAtivo(@PathVariable Long id) {
-        return ResponseEntity.ok().body(repositorioAtivo.findById(id).get());
+    public ResponseEntity<?> getAtivo(@PathVariable Long id) {
+        try {
+            return ResponseEntity.ok().body(repositorioAtivo.findById(id).get());
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @PostMapping
-    public ResponseEntity<Ativo> postAtivo(@RequestBody Ativo ativo) {
-        return ResponseEntity.ok().body(repositorioAtivo.save(ativo));
+    public ResponseEntity<?> postAtivo(@RequestBody Ativo ativo) {
+        try {
+            return ResponseEntity.ok().body(repositorioAtivo.save(ativo));
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @PutMapping("{id}")
@@ -60,7 +70,12 @@ public class ControleAtivo {
 
     @DeleteMapping("{id}")
     public ResponseEntity<?> deleteAtivo(@PathVariable Long id) {
-        repositorioAtivo.deleteById(id);
-        return ResponseEntity.ok().build();
+        try {
+            repositorioAtivo.deleteById(id);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        
     }
 }

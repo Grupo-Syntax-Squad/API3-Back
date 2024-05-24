@@ -21,12 +21,12 @@ public class ControleHistoricoManutencao {
     @Autowired
     private RepositorioHistoricoManutencao repositorioHistoricoManutencao;
 
-    @GetMapping("")
+    @GetMapping
     public ResponseEntity<List<HistoricoManutencao>> getHistoricoManutencoes() {
         try {
             return ResponseEntity.ok(repositorioHistoricoManutencao.findAll());
         } catch(Exception e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
     

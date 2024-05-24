@@ -34,7 +34,7 @@ public class ControleManutencao {
 
     private ManutencaoAtualizador manutencaoAtualizador = new ManutencaoAtualizador();
 
-    @GetMapping("")
+    @GetMapping
     public ResponseEntity<?> getManutencoes() {
         try {
             return new ResponseEntity<List<Manutencao>>(repositorioManutencao.findAll(), HttpStatus.OK);
@@ -43,7 +43,7 @@ public class ControleManutencao {
         }
     }
 
-    @PostMapping("")
+    @PostMapping
     public ResponseEntity<?> postManutencao(@RequestBody Manutencao manutencao) {
         try {
             Manutencao manutencaoEntidade = repositorioManutencao.save(manutencao);

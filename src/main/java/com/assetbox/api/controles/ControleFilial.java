@@ -29,7 +29,7 @@ public class ControleFilial {
     @GetMapping
     public ResponseEntity<?> getFiliais() {
         try {
-            if (repositorioFilial.findAll().isEmpty()) return new ResponseEntity<String>("Não há nenhuma filial cadastrada no sistema!", HttpStatus.BAD_REQUEST);
+            if (repositorioFilial.findAll().isEmpty()) return new ResponseEntity<String>("Não há nenhuma filial cadastrada no sistema!", HttpStatus.NOT_FOUND);
             else return new ResponseEntity<List<Filial>>(repositorioFilial.findAll(), HttpStatus.OK);
         } catch(Exception e) {
             return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
@@ -39,7 +39,7 @@ public class ControleFilial {
     @GetMapping("{id}")
     public ResponseEntity<?> getFilial(@PathVariable Long id) {
         try {
-            if (repositorioFilial.findById(id).isEmpty()) return new ResponseEntity<String>("Não há nenhuma filial com o ID " + id.toString() + " cadastrada no sistema!", HttpStatus.BAD_REQUEST);
+            if (repositorioFilial.findById(id).isEmpty()) return new ResponseEntity<String>("Não há nenhuma filial com o ID " + id.toString() + " cadastrada no sistema!", HttpStatus.NOT_FOUND);
             else return new ResponseEntity<Filial>(repositorioFilial.findById(id).get(), HttpStatus.OK);
         } catch(Exception e) {
             return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
@@ -65,7 +65,7 @@ public class ControleFilial {
                 
                 filialEntidade = repositorioFilial.save(filialEntidade);
                 return new ResponseEntity<>(filialEntidade, HttpStatus.OK);
-            } else return new ResponseEntity<String>("Não há nenhuma filial com o ID " + id.toString() + " cadastrada no sistema!", HttpStatus.BAD_REQUEST);
+            } else return new ResponseEntity<String>("Não há nenhuma filial com o ID " + id.toString() + " cadastrada no sistema!", HttpStatus.NOT_FOUND);
         } catch(Exception e) {
             return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -77,7 +77,7 @@ public class ControleFilial {
             if (repositorioFilial.findById(id).isPresent()) {
                 repositorioFilial.deleteById(id);
                 return new ResponseEntity<String>("Filial deletada com sucesso!", HttpStatus.OK);
-            } else return new ResponseEntity<String>("Não há nenhuma filial com o ID " + id.toString() + " cadastrada no sistema!", HttpStatus.BAD_REQUEST);
+            } else return new ResponseEntity<String>("Não há nenhuma filial com o ID " + id.toString() + " cadastrada no sistema!", HttpStatus.NOT_FOUND);
         } catch(Exception e) {
             return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
