@@ -1,6 +1,7 @@
 package com.assetbox.api.controles;
 
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
@@ -89,11 +90,7 @@ public class ControleRelatorio {
                         newRelatorio.setValorComFuncionario(valorAtual);
                     }
 
-                    LocalDate dataExpiracaoAtivo = LocalDate.of(
-                        ativo.getAti_data_expiracao().getYear(),
-                        ativo.getAti_data_expiracao().getMonth(), 
-                        ativo.getAti_data_expiracao().getDay()
-                        );
+                    LocalDate dataExpiracaoAtivo = ativo.getAti_data_expiracao().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
                     LocalDate dataAtual = LocalDate.now();
                     long daysBetween = ChronoUnit.DAYS.between(dataExpiracaoAtivo, dataAtual);
 
@@ -103,7 +100,7 @@ public class ControleRelatorio {
                         newRelatorio.setQuantidadeProximosManutencao(quantidadeAtual);
 
                         double valorAtual = newRelatorio.getValorProximosManutencao();
-                        valorAtual = valorAtual + 1;
+                        valorAtual = valorAtual + ativo.getAti_preco_aquisicao();
                         newRelatorio.setValorProximosManutencao(valorAtual);
                     }
                 }
