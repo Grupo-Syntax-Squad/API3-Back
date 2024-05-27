@@ -15,19 +15,16 @@ public class Destinatario {
     private Long des_id;
 
     @Column(nullable = false, unique = true)
-    private String des_cpf;
+    private String cpf;
 
     @Column(nullable = false)
     private String des_nome;
 
     @Column(nullable = false)
-    private String des_email;
+    private String email;
 
     @Column(nullable = false)
-    private String des_telefone;
-
-    @Column
-    private String des_senha;
+    private String telefone;
 
     @ManyToOne
     @JoinColumn(name = "des_endereco_id")
@@ -49,30 +46,22 @@ public class Destinatario {
         this.des_nome = des_nome;
     }
 
-    public String getDes_email() {
-        return des_email;
+    public String getEmail() {
+        return email;
     }
 
-    public void setDes_email(String des_email) {
-        this.des_email = des_email;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getDes_telefone() {
-        return des_telefone;
+    public String getTelefone() {
+        return telefone;
     }
 
-    public void setDes_telefone(String des_telefone) {
-        this.des_telefone = des_telefone;
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
     }
-
-    public String getDes_senha() {
-        return des_senha;
-    }
-
-    public void setDes_senha(String des_senha) {
-        this.des_senha = des_senha;
-    }
-
+    
     public Endereco getDes_endereco_id() {
         return des_endereco_id;
     }
@@ -81,11 +70,11 @@ public class Destinatario {
         this.des_endereco_id = des_endereco_id;
     }
 
-    public String getDes_cpf() {
-        return des_cpf;
+    public String getCpf() {
+        return cpf;
     }
 
-    public void setDes_cpf(String des_cpf) {
-        this.des_cpf = des_cpf;
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 }

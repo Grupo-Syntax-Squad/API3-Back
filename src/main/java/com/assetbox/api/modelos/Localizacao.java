@@ -12,8 +12,11 @@ public class Localizacao {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long loc_id;
 
-    @Column
+    @Column(nullable = false)
     private String loc_titulo;
+
+    @Column()
+    private Long loc_filial_id;
 
     public Long getLoc_id() {
         return loc_id;
@@ -29,5 +32,13 @@ public class Localizacao {
 
     public void setLoc_titulo(String loc_titulo) {
         this.loc_titulo = loc_titulo;
+    }
+
+    public Long getLoc_filial_id() {
+        return loc_filial_id;
+    }
+
+    public void setLoc_filial_id(Long loc_filial_id) {
+        this.loc_filial_id = loc_filial_id;
     }
 }

@@ -5,9 +5,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.assetbox.api.dtos.LoginDTO;
 import com.assetbox.api.dtos.RegistrarDTO;
+import com.assetbox.api.enums.AdminStatus;
 import com.assetbox.api.modelos.Administrador;
 import com.assetbox.api.processos.JwtUtil;
 import com.assetbox.api.repositorios.RepositorioAdministrador;
+
+import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,38 +29,41 @@ public class ControleAutenticacao {
     private JwtUtil jwtUtil;
 
     @PostMapping("login")
-    public ResponseEntity postLogin(@RequestBody LoginDTO data) {
-        Administrador administrador = repositorioAdministrador.findByEmail(data.email());
+    public ResponseEntity<?> postLogin(@RequestBody LoginDTO data) {
+        try {
+            Administrador administrador = repositorioAdministrador.findByEmail(data.email());
 
-        if (administrador == null || !administrador.getAdm_senha().equals(data.senha())) {
-            return ResponseEntity.badRequest().build();
+            if (administrador == null || !administrador.getAdm_senha().equals(data.senha())) {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+
+            String jwt = jwtUtil.generateToken(data.email());
+            ArrayList response = new ArrayList<>();
+            response.add(jwt);
+            response.add(administrador.getAdm_id());
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-
-        String jwt = jwtUtil.generateToken(data.email());
-
-        return ResponseEntity.ok(jwt);
     }
 
     @PostMapping("registrar")
-    public ResponseEntity postRegistrar(@RequestBody RegistrarDTO data) {
+    public ResponseEntity<?> postRegistrar(@RequestBody RegistrarDTO data) {
         if (repositorioAdministrador.findByEmail(data.adm_email()) != null) {
-            return ResponseEntity.badRequest().build();
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-
-        Administrador administrador = new Administrador(data.adm_nome(), data.adm_email(), data.adm_senha(), data.adm_telefone(), data.adm_cpf());
-
+        Administrador administrador = new Administrador(data.adm_nome(), data.adm_email(), data.adm_senha(), data.adm_telefone(), data.adm_cpf(), AdminStatus.ATIVO);
         repositorioAdministrador.save(administrador);
-
-        return ResponseEntity.ok().build();
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PostMapping("verificarToken")
-    public ResponseEntity postVerificarToken(@RequestBody String token) {
+    public ResponseEntity<?> postVerificarToken(@RequestBody String token) {
         try {
             boolean verificacao = jwtUtil.validateToken(token);
-            return ResponseEntity.ok(verificacao);
+            return new ResponseEntity<>(verificacao, HttpStatus.OK);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Token inválido");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
 }

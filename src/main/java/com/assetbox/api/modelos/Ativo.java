@@ -50,9 +50,6 @@ public class Ativo {
     private String ati_numero_serie;
 
     @Column
-    private int ati_quantidade;
-
-    @Column
     private Date ati_data_expiracao;
 
     @Column
@@ -104,6 +101,18 @@ public class Ativo {
 
     @Column
     private String ati_condicoes_uso;
+
+    @ManyToOne
+    @JoinColumn(name="ati_filial_id")
+    private Filial filial;
+
+    public Filial getAti_filial_id() {
+        return filial;
+    }
+
+    public void setAti_filial_id(Filial filial) {
+        this.filial = filial;
+    }
 
     public Long getAti_id() {
         return ati_id;
@@ -175,14 +184,6 @@ public class Ativo {
 
     public void setAti_numero_serie(String ati_numero_serie) {
         this.ati_numero_serie = ati_numero_serie;
-    }
-
-    public int getAti_quantidade() {
-        return ati_quantidade;
-    }
-
-    public void setAti_quantidade(int ati_quantidade) {
-        this.ati_quantidade = ati_quantidade;
     }
 
     public Date getAti_data_expiracao() {
@@ -313,5 +314,11 @@ public class Ativo {
         this.ati_condicoes_uso = ati_condicoes_uso;
     }
 
-    
+    public Documento getAti_documento_id() {
+        return ati_documento_id;
+    }
+
+    public void setAti_documento_id(Documento ati_documento_id) {
+        this.ati_documento_id = ati_documento_id;
+    }
 }

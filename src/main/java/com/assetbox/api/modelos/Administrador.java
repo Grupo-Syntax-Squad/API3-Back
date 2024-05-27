@@ -1,5 +1,8 @@
 package com.assetbox.api.modelos;
 
+
+import com.assetbox.api.enums.AdminStatus;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -14,20 +17,23 @@ public class Administrador {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long adm_id;
 	
-	@Column
+	@Column(nullable = false)
 	private String adm_nome;
 	
-	@Column
+	@Column(nullable = false, unique = true)
 	private String email;
 	
-	@Column
+	@Column(nullable = false)
 	private String adm_senha;
 
-	@Column
-	private String adm_telefone;
+	@Column(nullable = false, unique = true)
+	private String telefone;
 	
 	@Column(nullable = false, unique = true)
-	private String adm_cpf;
+	private String cpf;
+
+	@Column(nullable = false)
+	private AdminStatus status;
 
 //	@ManyToOne
 //	@JoinColumn(name = "adm_empresa_id")
@@ -36,12 +42,13 @@ public class Administrador {
 	public Administrador() {
 	}
 
-	public Administrador(String adm_nome, String email, String adm_senha, String adm_telefone, String adm_cpf) {
+	public Administrador(String adm_nome, String email, String adm_senha, String adm_telefone, String adm_cpf, AdminStatus status) {
 		this.adm_nome = adm_nome;
 		this.email = email;
 		this.adm_senha = adm_senha;
-		this.adm_telefone = adm_telefone;
-		this.adm_cpf = adm_cpf;
+		this.telefone = adm_telefone;
+		this.cpf = adm_cpf;
+		this.status = status;
 	}
 
 	public Long getAdm_id() {
@@ -77,19 +84,26 @@ public class Administrador {
 	}
 
 	public String getAdm_telefone() {
-		return adm_telefone;
+		return telefone;
 	}
 
 	public void setAdm_telefone(String adm_telefone) {
-		this.adm_telefone = adm_telefone;
+		this.telefone = adm_telefone;
 	}
 
 	public String getAdm_cpf() {
-		return adm_cpf;
+		return cpf;
 	}
 
 	public void setAdm_cpf(String adm_cpf) {
-		this.adm_cpf = adm_cpf;
+		this.cpf = adm_cpf;
 	}
-	
+
+	public AdminStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(AdminStatus status) {
+		this.status = status;
+	}
 }

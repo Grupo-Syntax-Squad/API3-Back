@@ -6,6 +6,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.assetbox.api.enums.AdminStatus;
 import com.assetbox.api.modelos.Administrador;
 import com.assetbox.api.repositorios.RepositorioAdministrador;
 
@@ -20,7 +21,7 @@ public class ApiApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		if (repositorioAdministrador.count() == 0) {
-			Administrador administrador = new Administrador("admin", "admin@gmail.com", "123", "(12) 99999-9999", "12345678912");
+			Administrador administrador = new Administrador("admin", "admin@gmail.com", "123", "(12) 99999-9999", "12345678912", AdminStatus.ATIVO);
 			repositorioAdministrador.save(administrador);
 			System.out.println("Administrador cadastrado com sucesso!");
 		}

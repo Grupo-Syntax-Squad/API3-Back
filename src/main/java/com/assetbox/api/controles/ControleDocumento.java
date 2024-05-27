@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -23,13 +24,14 @@ import com.assetbox.api.repositorios.RepositorioDocumento;
 
 
 @RestController
+@RequestMapping("documentos")
 public class ControleDocumento {
 
     @Autowired
     private RepositorioDocumento repositorioDocumento;
 
-    @GetMapping("/documentos/{id}")
-    public ResponseEntity<Resource> getDocumento(@PathVariable Long id) {
+    @GetMapping("{id}")
+    public ResponseEntity<?> getDocumento(@PathVariable Long id) {
         try {
             Documento documento = repositorioDocumento.findById(id).orElseThrow(() -> new RuntimeException("Documento não encontrado"));
 
@@ -42,12 +44,11 @@ public class ControleDocumento {
                 throw new RuntimeException("Não foi possível ler o arquivo!");
             }
         } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @PostMapping("/documentos")
+    @PostMapping
     public ResponseEntity<?> uploadDocumento(@RequestParam("file") MultipartFile file) {
         Path path = Paths.get("src/main/resources/static/" + file.getOriginalFilename());
 
