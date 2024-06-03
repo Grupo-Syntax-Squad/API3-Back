@@ -1,7 +1,11 @@
 package com.assetbox.api.modelos;
 
+import com.assetbox.api.enums.DestinatarioStatus;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -29,6 +33,17 @@ public class Destinatario {
     @ManyToOne
     @JoinColumn(name = "des_endereco_id")
     private Endereco des_endereco_id;
+
+    @Enumerated(EnumType.STRING)
+    private DestinatarioStatus des_status;
+
+    public DestinatarioStatus getDes_status() {
+        return des_status;
+    }
+
+    public void setDes_status(DestinatarioStatus des_status) {
+        this.des_status = des_status;
+    }
 
     public Long getDes_id() {
         return des_id;
