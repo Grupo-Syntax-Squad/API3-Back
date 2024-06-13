@@ -35,7 +35,7 @@ public class AtivoAtualizador {
 
     public Ativo atualizar(Ativo ativoEntidade, Ativo atualizacao) {
 
-        if (atualizacao.getAti_localizacao_id().getLoc_id() != null) {
+        if (atualizacao.getAti_localizacao_id() != null && atualizacao.getAti_localizacao_id().getLoc_id() != null) {
             ResponseEntity<?> responseLocalizacao = controleLocalizacao.getLocalizacao(
                 atualizacao.getAti_localizacao_id().getLoc_id()
                 );
@@ -44,7 +44,7 @@ public class AtivoAtualizador {
             }
         }
 
-        if (atualizacao.getAti_destinatario_id().getDes_id() != null) {
+        if (atualizacao.getAti_destinatario_id() != null && atualizacao.getAti_destinatario_id().getDes_id() != null) {
             ResponseEntity<?> responseDestinatario = controleDestinatario.getDestinatario(
                 atualizacao.getAti_destinatario_id().getDes_id()
                 );
@@ -53,7 +53,7 @@ public class AtivoAtualizador {
             }
         }
 
-        if (atualizacao.getAti_tipo_id().getTip_id() != null) {
+        if (atualizacao.getAti_tipo_id() != null && atualizacao.getAti_tipo_id().getTip_id() != null) {
             ResponseEntity<?> responseTipo = controleTipo.getTipo(
                 atualizacao.getAti_tipo_id().getTip_id());
             if (responseTipo.getStatusCode().value() == 200) {
@@ -61,16 +61,14 @@ public class AtivoAtualizador {
             }
         }
 
-        if (atualizacao.getAti_imagem_id().getImg_id() != null) {
-            ResponseEntity<?> responseImagem = controleImagem.getImagem(
-                atualizacao.getAti_imagem_id().getImg_id()
-                );
+        if (atualizacao.getAti_imagem_id() != null && atualizacao.getAti_imagem_id().getImg_id() != null) {
+            ResponseEntity<?> responseImagem = controleImagem.getImagem(atualizacao.getAti_imagem_id().getImg_id());
             if (responseImagem.getStatusCode().value() == 200) {
                 ativoEntidade.setAti_imagem_id(atualizacao.getAti_imagem_id());
             }
         }
 
-        if (atualizacao.getAti_documento_id().getDocumentoId() != null) {
+        if (atualizacao.getAti_documento_id() != null && atualizacao.getAti_documento_id().getDocumentoId() != null) {
             ResponseEntity<?> responseDocumento = controleDocumento.getDocumento(
                 atualizacao.getAti_documento_id().getDocumentoId()
                 );
@@ -79,7 +77,7 @@ public class AtivoAtualizador {
             }
         }
 
-        if (atualizacao.getAti_filial_id().getFil_id() != null) {
+        if (atualizacao.getAti_filial_id() != null && atualizacao.getAti_filial_id().getFil_id() != null) {
             ResponseEntity<?> responseFilial = controleFilial.getFilial(
                 atualizacao.getAti_filial_id().getFil_id()
                 );
