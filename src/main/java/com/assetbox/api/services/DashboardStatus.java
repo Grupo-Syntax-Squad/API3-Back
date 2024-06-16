@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import com.assetbox.api.classes.ContagemDTO;
 import com.assetbox.api.enums.AtiStatus;
 import com.assetbox.api.modelos.Ativo;
-import com.assetbox.api.modelos.Localizacao;
 import com.assetbox.api.repositorios.RepositorioAtivo;
 
 @Service
@@ -20,7 +19,7 @@ public class DashboardStatus {
     @Autowired
     private RepositorioAtivo repositorio;
 
-    public List<ContagemDTO> contarAtivosPorLocalizacao() {
+    public List<ContagemDTO> contarAtivosPorStatus() {
         List<Ativo> ativos = repositorio.findAll();
         Map<AtiStatus, Long> contagem = new HashMap<>();
         for (Ativo ativo : ativos) {
