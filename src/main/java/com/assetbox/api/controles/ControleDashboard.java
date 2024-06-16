@@ -15,8 +15,6 @@ import com.assetbox.api.repositorios.RepositorioAtivo;
 import com.assetbox.api.services.DashboardStatus;
 import com.assetbox.api.services.DashboardTipo;
 import com.assetbox.api.services.DashboardLocalização;
-import org.springframework.web.bind.annotation.RequestParam;
-
 
 
 @RestController
