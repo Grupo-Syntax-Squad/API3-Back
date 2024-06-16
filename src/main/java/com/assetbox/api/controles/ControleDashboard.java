@@ -3,6 +3,7 @@ package com.assetbox.api.controles;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,8 @@ import com.assetbox.api.repositorios.RepositorioAtivo;
 import com.assetbox.api.services.DashboardStatus;
 import com.assetbox.api.services.DashboardTipo;
 import com.assetbox.api.services.DashboardLocalização;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 @RestController
@@ -73,6 +76,16 @@ public class ControleDashboard {
             return ResponseEntity.ok(total);
         } catch (Exception e) {
             return ResponseEntity.internalServerError().body(e.getMessage());
+        }
+    }
+    
+    @GetMapping("quantidadeTotal")
+    public ResponseEntity<?> contarQuantidadeTotal() {
+        try {
+            List<Ativo> ativos = repositorioAtivo.findAll();
+            return new ResponseEntity<>(ativos.size(), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
     
