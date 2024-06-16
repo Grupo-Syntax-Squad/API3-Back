@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.assetbox.api.classes.ContagemDTO;
+import com.assetbox.api.modelos.Ativo;
+import com.assetbox.api.repositorios.RepositorioAtivo;
 import com.assetbox.api.services.DashboardStatus;
 import com.assetbox.api.services.DashboardTipo;
 import com.assetbox.api.services.DashboardLocalização;
@@ -26,6 +28,9 @@ public class ControleDashboard {
 
     @Autowired
     private DashboardTipo dashboardTipo;
+
+    @Autowired
+    private RepositorioAtivo repositorioAtivo;
 
     @GetMapping("localizacao")
     public ResponseEntity<?> contarAtivosPorLocalizacao() {
@@ -56,4 +61,19 @@ public class ControleDashboard {
             return ResponseEntity.ofNullable(e);
         }   
     }
+
+    @GetMapping("valorTotal")
+    public ResponseEntity<?> contarValorTotal() {
+        try {
+            double total = 0;
+            List<Ativo> ativos = repositorioAtivo.findAll();
+            for (Ativo ativo: ativos) {
+                total += ativo.getAti_preco_aquisicao();
+            }
+            return ResponseEntity.ok(total);
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body(e.getMessage());
+        }
+    }
+    
 }
